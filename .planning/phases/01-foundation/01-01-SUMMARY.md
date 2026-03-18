@@ -81,7 +81,7 @@ completed: 2026-03-18
 - **Duration:** ~15 min
 - **Started:** 2026-03-18T10:13:03Z
 - **Completed:** 2026-03-18T10:28:00Z (paused at Task 3 checkpoint)
-- **Tasks completed:** 2 of 3 (Task 3 is a human-verify checkpoint)
+- **Tasks completed:** 3 of 3 (Task 3 checkpoint resolved — tokens approved by user 2026-03-18)
 - **Files modified:** 14
 
 ## Accomplishments
@@ -98,7 +98,7 @@ Each task was committed atomically:
 
 1. **Task 1: Scaffold Next.js 16 project** - `c5102c6` (feat)
 2. **Task 2: Design token bridge + ESLint rule** - `95ef1be` (feat)
-3. **Task 3: Token verification checkpoint** - PENDING (awaiting human verification)
+3. **Task 3: Token verification checkpoint** - `chore` (tokens approved by user — fallback palette accepted)
 
 ## Files Created/Modified
 
@@ -146,9 +146,9 @@ None for this plan. Task 3 checkpoint requires user to verify token values again
 
 ## Next Phase Readiness
 
-- **Task 3 (checkpoint):** User must verify that token hex values in `app/globals.css` match the actual MomCare Design System. Run `npm run dev`, open DevTools on `:root`, compare CSS custom properties against `https://momcaredesignsystemwithcodexnew.vercel.app`.
-- Once tokens are confirmed: Plan 01-02 can proceed (route shells, middleware, mock layer).
-- All tooling infrastructure is in place — zero blockers for downstream plans once tokens are verified.
+- **Task 3 (checkpoint):** User verified token hex values against the MomCare Design System Storybook and approved the fallback palette in `app/globals.css` on 2026-03-18.
+- Plan 01-02 is unblocked and can proceed (route shells, middleware, mock layer).
+- All tooling infrastructure is in place — zero blockers for downstream plans.
 
 ---
 *Phase: 01-foundation*
