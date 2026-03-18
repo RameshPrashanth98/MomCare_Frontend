@@ -77,6 +77,7 @@ None yet.
 | 260318-p7i | Initialize git, connect to GitHub repo and push all existing commits | 2026-03-18 | 9abade5 | [260318-p7i-initialize-git-connect-to-github-repo-an](./quick/260318-p7i-initialize-git-connect-to-github-repo-an/) |
 | 260318-pth | Build 4 onboarding screens with splash redirect and SVG illustrations | 2026-03-18 | 4758d47 | [260318-pth-build-4-onboarding-screens-with-splash-r](./quick/260318-pth-build-4-onboarding-screens-with-splash-r/) |
 | 260318-qrg | Rewrite all 4 onboarding SVG illustrations with quality scenes matching wireframes | 2026-03-18 | b9417b1 | [260318-qrg-rewrite-all-4-onboarding-svg-illustratio](./quick/260318-qrg-rewrite-all-4-onboarding-svg-illustratio/) |
+| 260318-rhw | Push all pending changes to GitHub | 2026-03-18 | 0d01627 | [260318-rhw-push-changes-to-github](./quick/260318-rhw-push-changes-to-github/) |
 
 ### Blockers/Concerns
 
