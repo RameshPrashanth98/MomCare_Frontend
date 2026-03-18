@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: "Completed quick task 260318-u2t: build login screen matching wireframe"
 last_updated: "2026-03-18T16:17:13.255Z"
-last_activity: 2026-03-18 — Plans 01-02 and 01-02b complete; mock DB, API layer, MSW, TanStack Query, Zustand, Providers all wired
+last_activity: 2026-03-18 — Completed quick task 260318-u2t: build login screen matching wireframe
 progress:
   total_phases: 6
   completed_phases: 0
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-03-18)
 Phase: 1 of 6 (Foundation)
 Plan: 3 of 4 in current phase (01-01 ✓, 01-02 ✓, 01-02b ✓ — 01-03 next)
 Status: In progress
-Last activity: 2026-03-18 — Plans 01-02 and 01-02b complete; mock DB, API layer, MSW, TanStack Query, Zustand, Providers all wired
+Last activity: 2026-03-18 — Completed quick task 260318-u2t: build login screen matching wireframe
 
 Progress: [███████░░░] 75%
 
@@ -79,6 +79,7 @@ None yet.
 | 260318-pth | Build 4 onboarding screens with splash redirect and SVG illustrations | 2026-03-18 | 4758d47 | [260318-pth-build-4-onboarding-screens-with-splash-r](./quick/260318-pth-build-4-onboarding-screens-with-splash-r/) |
 | 260318-qrg | Rewrite all 4 onboarding SVG illustrations with quality scenes matching wireframes | 2026-03-18 | b9417b1 | [260318-qrg-rewrite-all-4-onboarding-svg-illustratio](./quick/260318-qrg-rewrite-all-4-onboarding-svg-illustratio/) |
 | 260318-rhw | Push all pending changes to GitHub | 2026-03-18 | 0d01627 | [260318-rhw-push-changes-to-github](./quick/260318-rhw-push-changes-to-github/) |
+| 260318-u2t | Build login screen matching wireframe with redirect from onboarding Get Started and Skip buttons | 2026-03-18 | 95683c7 | [260318-u2t-build-login-screen-matching-wireframe-wi](./quick/260318-u2t-build-login-screen-matching-wireframe-wi/) |
 
 ### Blockers/Concerns
 
