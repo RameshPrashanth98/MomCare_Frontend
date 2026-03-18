@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-03-18)
 Phase: 1 of 6 (Foundation)
 Plan: 3 of 4 in current phase (01-01 ✓, 01-02 ✓, 01-02b ✓ — 01-03 next)
 Status: In progress
-Last activity: 2026-03-18 — Completed quick task 260318-v20: Fix action row buttons width overflow on iPhone 16 Pro home screen
+Last activity: 2026-03-18 — Completed quick task 260318-vtg: Update README.md with project overview for MomCare frontend
 
 Progress: [███████░░░] 75%
 
@@ -83,6 +83,7 @@ None yet.
 | 260318-uhi | Push all pending changes to GitHub | 2026-03-18 | be5c5bf | [260318-uhi-push-changes-to-github](./quick/260318-uhi-push-changes-to-github/) |
 | 260318-ulk | Build home screen matching wireframe with all 9 sections | 2026-03-18 | ec41889 | [260318-ulk-build-home-screen-matching-wireframe-wit](./quick/260318-ulk-build-home-screen-matching-wireframe-wit/) |
 | 260318-v20 | Fix action row buttons width overflow on iPhone 16 Pro home screen | 2026-03-18 | ea97686 | [260318-v20-fix-action-row-buttons-width-overflow-on](./quick/260318-v20-fix-action-row-buttons-width-overflow-on/) |
+| 260318-vtg | Update README.md with project overview for MomCare frontend | 2026-03-18 | 8a2da9d | [260318-vtg-update-readme-md-with-project-overview-f](./quick/260318-vtg-update-readme-md-with-project-overview-f/) |
 
 ### Blockers/Concerns
 
