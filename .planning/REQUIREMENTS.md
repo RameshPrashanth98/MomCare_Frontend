@@ -9,9 +9,9 @@
 
 ### Foundation & Infrastructure
 
-- [ ] **FOUND-01**: Next.js 15 project scaffolded with App Router, TypeScript, Tailwind CSS, ESLint, and Prettier
-- [ ] **FOUND-02**: MomCare Design System tokens bridged into Tailwind config via CSS custom properties — zero hardcoded color, spacing, radius, or shadow values in any component
-- [ ] **FOUND-03**: Tailwind arbitrary value usage blocked in CI (lint rule or Stylelint check) to prevent token bypass
+- [x] **FOUND-01**: Next.js 15 project scaffolded with App Router, TypeScript, Tailwind CSS, ESLint, and Prettier
+- [x] **FOUND-02**: MomCare Design System tokens bridged into Tailwind config via CSS custom properties — zero hardcoded color, spacing, radius, or shadow values in any component
+- [x] **FOUND-03**: Tailwind arbitrary value usage blocked in CI (lint rule or Stylelint check) to prevent token bypass
 - [ ] **FOUND-04**: MSW 2.x mock data layer configured with a `lib/api/` abstraction so all mock calls are swappable for a real API without touching component code
 - [ ] **FOUND-05**: Realistic mock data seeded for all entities: mothers, visits, vaccinations, weight records, clinic sessions, staff members
 - [ ] **FOUND-06**: TanStack Query configured as the sole owner of server/entity state; Zustand stores UI state only (drawers, filters, wizard steps, session)
@@ -120,9 +120,9 @@
 
 ### Quality — Cross-Cutting
 
-- [ ] **QUAL-01**: All screens meet WCAG 2.1 AA — minimum 4.5:1 contrast on body text, 3:1 on large text and UI components
-- [ ] **QUAL-02**: All interactive touch targets are minimum 44×44px on mobile
-- [ ] **QUAL-03**: All screens are mobile-first and fully responsive; primary breakpoints: 360px (mobile), 768px (tablet), 1280px (desktop)
+- [x] **QUAL-01**: All screens meet WCAG 2.1 AA — minimum 4.5:1 contrast on body text, 3:1 on large text and UI components
+- [x] **QUAL-02**: All interactive touch targets are minimum 44×44px on mobile
+- [x] **QUAL-03**: All screens are mobile-first and fully responsive; primary breakpoints: 360px (mobile), 768px (tablet), 1280px (desktop)
 - [ ] **QUAL-04**: Keyboard does not obscure active input fields on mobile (scroll into view behavior)
 - [ ] **QUAL-05**: All forms use React Hook Form with Zod schemas for validation; no uncontrolled inputs
 - [ ] **QUAL-06**: Risk level badge is visible on every mother list row AND every mother profile header
@@ -186,18 +186,18 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Pending |
 | FOUND-05 | Phase 1 | Pending |
 | FOUND-06 | Phase 1 | Pending |
 | FOUND-07 | Phase 1 | Pending |
 | FOUND-08 | Phase 1 | Pending |
 | FOUND-09 | Phase 1 | Pending |
-| QUAL-01 | Phase 1 (baseline) + enforced in all phases | Pending |
-| QUAL-02 | Phase 1 (baseline) + enforced in all phases | Pending |
-| QUAL-03 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-01 | Phase 1 (baseline) + enforced in all phases | Complete |
+| QUAL-02 | Phase 1 (baseline) + enforced in all phases | Complete |
+| QUAL-03 | Phase 1 (baseline) + enforced in all phases | Complete |
 | QUAL-04 | Phase 1 (baseline) + enforced in all phases | Pending |
 | QUAL-05 | Phase 1 (baseline) + enforced in all phases | Pending |
 | QUAL-06 | Phase 1 (baseline) + enforced in all phases | Pending |
