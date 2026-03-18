@@ -61,8 +61,34 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
+  /* Colors — MomCare brand pink (splash + onboarding) */
+  --color-brand-pink: #E8527A;
+  --color-brand-pink-dark: #C93A62;
+  --color-brand-pink-light: #FF85A8;
+  --color-splash-bg-center: #FFFFFF;
+  --color-splash-bg-mid: #FFE8F0;
+  --color-splash-bg-edge: #FFCDE0;
+  --color-illustration-bg: #FFF5F0;
+
   /* Breakpoints — mobile-first (QUAL-03) */
   --breakpoint-mobile: 360px;
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1280px;
+}
+
+/* Splash screen animations */
+@keyframes splash-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes splash-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
