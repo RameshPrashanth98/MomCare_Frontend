@@ -383,7 +383,7 @@ export default function DashboardPage() {
 
       {/* 7. Sticky Action Row (above bottom nav) */}
       <div
-        className="flex items-center justify-center"
+        className="flex items-center w-full"
         style={{
           paddingLeft:  'var(--spacing-md)',
           paddingRight: 'var(--spacing-md)',
@@ -396,8 +396,9 @@ export default function DashboardPage() {
         {/* + Register Mother */}
         <button
           type="button"
-          className="flex items-center"
+          className="flex items-center justify-center"
           style={{
+            flex:         1,
             gap:          'var(--spacing-xs)',
             background:   'var(--color-brand-pink)',
             color:        'white',
@@ -405,13 +406,12 @@ export default function DashboardPage() {
             borderRadius: 'var(--radius-full)',
             fontSize:     '13px',
             fontWeight:   500,
-            paddingLeft:  'var(--spacing-md)',
-            paddingRight: 'var(--spacing-md)',
-            paddingTop:   'var(--spacing-sm)',
-            paddingBottom:'var(--spacing-sm)',
+            paddingLeft:  'var(--spacing-sm)',
+            paddingRight: 'var(--spacing-sm)',
             height:       '40px',
             cursor:       'pointer',
             whiteSpace:   'nowrap',
+            minWidth:     0,
           }}
         >
           <Plus size={14} />
@@ -421,8 +421,9 @@ export default function DashboardPage() {
         {/* Clinic Visit */}
         <button
           type="button"
-          className="flex items-center"
+          className="flex items-center justify-center"
           style={{
+            flex:         1,
             gap:          'var(--spacing-xs)',
             background:   'transparent',
             color:        'var(--color-brand-pink)',
@@ -430,13 +431,12 @@ export default function DashboardPage() {
             borderRadius: 'var(--radius-full)',
             fontSize:     '13px',
             fontWeight:   500,
-            paddingLeft:  'var(--spacing-md)',
-            paddingRight: 'var(--spacing-md)',
-            paddingTop:   'var(--spacing-sm)',
-            paddingBottom:'var(--spacing-sm)',
+            paddingLeft:  'var(--spacing-sm)',
+            paddingRight: 'var(--spacing-sm)',
             height:       '40px',
             cursor:       'pointer',
             whiteSpace:   'nowrap',
+            minWidth:     0,
           }}
         >
           <Stethoscope size={14} />
@@ -446,8 +446,9 @@ export default function DashboardPage() {
         {/* Add Vaccination */}
         <button
           type="button"
-          className="flex items-center"
+          className="flex items-center justify-center"
           style={{
+            flex:         1,
             gap:          'var(--spacing-xs)',
             background:   'transparent',
             color:        'var(--color-primary)',
@@ -455,13 +456,12 @@ export default function DashboardPage() {
             borderRadius: 'var(--radius-full)',
             fontSize:     '13px',
             fontWeight:   500,
-            paddingLeft:  'var(--spacing-md)',
-            paddingRight: 'var(--spacing-md)',
-            paddingTop:   'var(--spacing-sm)',
-            paddingBottom:'var(--spacing-sm)',
+            paddingLeft:  'var(--spacing-sm)',
+            paddingRight: 'var(--spacing-sm)',
             height:       '40px',
             cursor:       'pointer',
             whiteSpace:   'nowrap',
+            minWidth:     0,
           }}
         >
           <Syringe size={14} />
