@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node \"C:/Users/Ramesh Prashanth/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"docs: initialize project\" --files .planning/PROJECT.md)",
+      "Bash(node \"C:/Users/Ramesh Prashanth/.claude/get-shit-done/bin/gsd-tools.cjs\" commit \"chore: add project config\" --files .planning/config.json)",
+      "Bash(node:*)",
+      "WebSearch",
+      "Bash(cd:*)",
+      "Bash(npx msw:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(npx next:*)",
+      "Bash(cmd /c \"for /f \"\"tokens=5\"\" %a in \\(''netstat -aon ^| findstr :3000''\\) do taskkill /PID %a /F\")",
+      "Bash(cmd /c \"taskkill /F /IM node.exe\")",
+      "Bash(cmd /c \"taskkill /PID 19928 /F\")",
+      "Skill(gsd:quick)",
+      "WebFetch(domain:momcaredesignsystemwithcodexnew.vercel.app)"
+    ]
+  }
+}
