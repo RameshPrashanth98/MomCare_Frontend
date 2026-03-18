@@ -1,26 +1,68 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* MomCare Design System Token Bridge
+     Source: momcaredesignsystemwithcodexnew.vercel.app
+     All component styles MUST use these tokens — no hardcoded values.
+     Tailwind v4 auto-generates utility classes from these:
+       bg-primary, text-on-surface, rounded-md, shadow-sm, etc. */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Colors — primary brand */
+  --color-primary: #1B6B4A;
+  --color-primary-light: #E8F5EE;
+  --color-primary-dark: #0D4A30;
+  --color-primary-hover: #155A3E;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Colors — semantic surface & text */
+  --color-surface: #FFFFFF;
+  --color-surface-secondary: #F8F9FA;
+  --color-on-surface: #1A1A2E;
+  --color-on-surface-secondary: #6B7280;
+  --color-border: #E5E7EB;
+  --color-border-strong: #D1D5DB;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Colors — risk levels (clinical) */
+  --color-risk-high: #DC2626;
+  --color-risk-high-bg: #FEF2F2;
+  --color-risk-medium: #F59E0B;
+  --color-risk-medium-bg: #FFFBEB;
+  --color-risk-low: #16A34A;
+  --color-risk-low-bg: #F0FDF4;
+
+  /* Colors — status */
+  --color-success: #16A34A;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
+
+  /* Colors — vaccination status (VACC-02) */
+  --color-vax-given: #16A34A;
+  --color-vax-due: #F59E0B;
+  --color-vax-overdue: #DC2626;
+  --color-vax-not-applicable: #9CA3AF;
+
+  /* Spacing scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Breakpoints — mobile-first (QUAL-03) */
+  --breakpoint-mobile: 360px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1280px;
 }
