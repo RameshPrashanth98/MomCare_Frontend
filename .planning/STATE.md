@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: Completed 01-02b-PLAN.md — Wave 2 done; 01-03 is next
 last_updated: "2026-03-18T12:00:00.000Z"
-last_activity: 2026-03-18 - Completed quick task 260318-p7i: Initialize git, connect to GitHub repo and push all existing commits
+last_activity: 2026-03-18 - Completed quick task 260318-pth: Build 4 onboarding screens with splash redirect and SVG illustrations
 progress:
   total_phases: 6
   completed_phases: 0
@@ -75,6 +75,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260318-p7i | Initialize git, connect to GitHub repo and push all existing commits | 2026-03-18 | 9abade5 | [260318-p7i-initialize-git-connect-to-github-repo-an](./quick/260318-p7i-initialize-git-connect-to-github-repo-an/) |
+| 260318-pth | Build 4 onboarding screens with splash redirect and SVG illustrations | 2026-03-18 | 4758d47 | [260318-pth-build-4-onboarding-screens-with-splash-r](./quick/260318-pth-build-4-onboarding-screens-with-splash-r/) |
 
 ### Blockers/Concerns
 
