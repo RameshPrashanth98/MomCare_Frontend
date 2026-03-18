@@ -186,26 +186,92 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 through FOUND-09 | Phase 1 | Pending |
-| AUTH-01 through AUTH-07 | Phase 2 | Pending |
-| DASH-01 through DASH-04 | TBD | Pending |
-| NOTIF-01 through NOTIF-05 | TBD | Pending |
-| MOTH-01 through MOTH-09 | TBD | Pending |
-| MOTH-10 through MOTH-16 | TBD | Pending |
-| MED-01 through MED-04 | TBD | Pending |
-| VACC-01 through VACC-04 | TBD | Pending |
-| WGHT-01 through WGHT-05 | TBD | Pending |
-| TIME-01 through TIME-05 | TBD | Pending |
-| SCHED-01 through SCHED-06 | TBD | Pending |
-| VISIT-01 through VISIT-04 | TBD | Pending |
-| UPROF-01 through UPROF-03 | TBD | Pending |
-| QUAL-01 through QUAL-08 | All phases | Pending |
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| FOUND-06 | Phase 1 | Pending |
+| FOUND-07 | Phase 1 | Pending |
+| FOUND-08 | Phase 1 | Pending |
+| FOUND-09 | Phase 1 | Pending |
+| QUAL-01 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-02 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-03 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-04 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-05 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-06 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-07 | Phase 1 (baseline) + enforced in all phases | Pending |
+| QUAL-08 | Phase 1 (baseline) + enforced in all phases | Pending |
+| AUTH-01 | Phase 2 | Pending |
+| AUTH-02 | Phase 2 | Pending |
+| AUTH-03 | Phase 2 | Pending |
+| AUTH-04 | Phase 2 | Pending |
+| AUTH-05 | Phase 2 | Pending |
+| AUTH-06 | Phase 2 | Pending |
+| AUTH-07 | Phase 2 | Pending |
+| DASH-01 | Phase 3 | Pending |
+| DASH-02 | Phase 3 | Pending |
+| DASH-03 | Phase 3 | Pending |
+| DASH-04 | Phase 3 | Pending |
+| MOTH-01 | Phase 3 | Pending |
+| MOTH-02 | Phase 3 | Pending |
+| MOTH-03 | Phase 3 | Pending |
+| MOTH-04 | Phase 3 | Pending |
+| MOTH-05 | Phase 3 | Pending |
+| MOTH-06 | Phase 3 | Pending |
+| MOTH-07 | Phase 3 | Pending |
+| MOTH-08 | Phase 3 | Pending |
+| MOTH-09 | Phase 3 | Pending |
+| MOTH-10 | Phase 3 | Pending |
+| MOTH-11 | Phase 3 | Pending |
+| MOTH-12 | Phase 3 | Pending |
+| MOTH-13 | Phase 3 | Pending |
+| MOTH-14 | Phase 3 | Pending |
+| MOTH-15 | Phase 3 | Pending |
+| MOTH-16 | Phase 3 | Pending |
+| VISIT-01 | Phase 4 | Pending |
+| VISIT-02 | Phase 4 | Pending |
+| VISIT-03 | Phase 4 | Pending |
+| VISIT-04 | Phase 4 | Pending |
+| VACC-01 | Phase 4 | Pending |
+| VACC-02 | Phase 4 | Pending |
+| VACC-03 | Phase 4 | Pending |
+| VACC-04 | Phase 4 | Pending |
+| WGHT-01 | Phase 4 | Pending |
+| WGHT-02 | Phase 4 | Pending |
+| WGHT-03 | Phase 4 | Pending |
+| WGHT-04 | Phase 4 | Pending |
+| WGHT-05 | Phase 4 | Pending |
+| SCHED-01 | Phase 5 | Pending |
+| SCHED-02 | Phase 5 | Pending |
+| SCHED-03 | Phase 5 | Pending |
+| SCHED-04 | Phase 5 | Pending |
+| SCHED-05 | Phase 5 | Pending |
+| SCHED-06 | Phase 5 | Pending |
+| MED-01 | Phase 6 | Pending |
+| MED-02 | Phase 6 | Pending |
+| MED-03 | Phase 6 | Pending |
+| MED-04 | Phase 6 | Pending |
+| TIME-01 | Phase 6 | Pending |
+| TIME-02 | Phase 6 | Pending |
+| TIME-03 | Phase 6 | Pending |
+| TIME-04 | Phase 6 | Pending |
+| TIME-05 | Phase 6 | Pending |
+| NOTIF-01 | Phase 6 | Pending |
+| NOTIF-02 | Phase 6 | Pending |
+| NOTIF-03 | Phase 6 | Pending |
+| NOTIF-04 | Phase 6 | Pending |
+| NOTIF-05 | Phase 6 | Pending |
+| UPROF-01 | Phase 6 | Pending |
+| UPROF-02 | Phase 6 | Pending |
+| UPROF-03 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 72 total
-- Mapped to phases: TBD (roadmapper will assign)
-- Unmapped: TBD ⚠️
+- Mapped to phases: 72/72
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-18*
-*Last updated: 2026-03-18 after initial definition*
+*Last updated: 2026-03-18 after roadmap creation*
