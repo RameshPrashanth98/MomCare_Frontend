@@ -21,7 +21,7 @@
 
 ### Authentication & Onboarding
 
-- [ ] **AUTH-01**: Staff member can view onboarding flow (3–5 screens) on first app launch introducing core workflows
+- [x] **AUTH-01**: Staff member can view onboarding flow (3–5 screens) on first app launch introducing core workflows
 - [ ] **AUTH-02**: Onboarding has a skip option visible from screen 1 and a progress indicator throughout
 - [ ] **AUTH-03**: Staff member can log in with username and password
 - [ ] **AUTH-04**: Login screen displays facility/clinic name for multi-site orientation
@@ -203,7 +203,7 @@
 | QUAL-06 | Phase 1 (baseline) + enforced in all phases | Pending |
 | QUAL-07 | Phase 1 (baseline) + enforced in all phases | Pending |
 | QUAL-08 | Phase 1 (baseline) + enforced in all phases | Pending |
-| AUTH-01 | Phase 2 | Pending |
+| AUTH-01 | Phase 2 | Complete |
 | AUTH-02 | Phase 2 | Pending |
 | AUTH-03 | Phase 2 | Pending |
 | AUTH-04 | Phase 2 | Pending |
