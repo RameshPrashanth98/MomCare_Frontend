@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Calling any `lib/api/` function (e.g., `getMothers()`) returns typed mock data seeded with realistic entities; the same call signature works unchanged when the mock handler is swapped for a real fetch
   4. axe-core runs in CI against a Storybook smoke-story and reports zero violations
   5. The three route groups (`(onboarding)`, `(auth)`, `(app)`) exist with isolated layout shells; navigating to an `(app)` route while unauthenticated redirects to `/login`
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 01-01: Project scaffold, design token bridge, and Tailwind config
@@ -47,7 +47,7 @@ Plans:
   2. After logging in and refreshing the browser, the staff member is still authenticated and lands on the dashboard — session is cookie-based, not localStorage
   3. Staff member can log out from the navigation on any screen and is immediately redirected to login
   4. A first-time user sees the onboarding flow (3-5 screens) with a visible skip option on screen 1 and a progress indicator; completing or skipping lands on the dashboard
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 02-01: Login screen and mock authentication with Zustand session slice (wireframes required)
@@ -63,7 +63,7 @@ Plans:
   3. Staff member can search by name, ID, phone, and community; recent searches appear when the field is focused and empty; no-result state shows "Register as new mother" CTA; matched substrings are highlighted in results
   4. Mother profile shows full header (name, age, risk badge, gestational age as weeks+days, EDD), tabbed content sections (Overview, Visits, Vaccinations, Weight, Timeline), sticky quick-action bar (Log Visit, Add Note, Assign), and visit history in reverse-chronological order
   5. Staff member can register a new mother by entering name, contact, date of birth, LMP/EDD, risk level, assigned clinic and midwife; the record appears in the mothers list immediately
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 03-01: Dashboard home screen (wireframes required)
@@ -79,7 +79,7 @@ Plans:
   2. Vaccination records table shows each vaccine with color-coded status (given/due/overdue/not yet applicable); staff member can log a vaccination with date, vaccine name, dose, and administering clinician; deviations from schedule can be recorded with a reason
   3. Weight chart displays actual weight plotted against gestational age with IOM recommended gain range bands overlaid; x-axis is horizontally scrollable on mobile; data table below chart shows date, weight, BP, and fundal height
   4. Staff member can log a new weight/health measurement from the weight screen; the new data point appears immediately on the chart and in the table
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 04-01: Visit registration form as modal sheet with clinical field validation (wireframes required)
@@ -94,7 +94,7 @@ Plans:
   1. Clinic schedule shows sessions in day/list view (mobile default) and calendar view; each row shows date, time, session name, confirmed attendee count and capacity, and status; staff member can navigate to a specific date and jump back to today
   2. Staff member can tap a session row to view session detail: session metadata, attendee roster with each mother's risk badge and last-visit date, per-attendee status (Registered / Attended / Did Not Attend / Rescheduled), and session notes
   3. Staff member can add a new clinic session with name/type, date, start/end time, location, lead clinician, and capacity; date is entered via a touch-friendly date picker (no text input for dates on mobile); the new session appears on the schedule immediately
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 05-01: Clinic schedule list and calendar view (wireframes required)
@@ -109,7 +109,7 @@ Plans:
   2. Pregnancy timeline is a scrollable vertical timeline with WHO ANC contact point markers (8 contacts), a "you are here" indicator at current gestational age, completed visits and vaccinations plotted as color-coded events (blue/green/red), and upcoming recommended contacts shown as future markers
   3. Notification bell in navigation shows unread count badge; notification feed groups alerts by type (clinical, scheduling, system); tapping a notification navigates directly to the relevant record (mother profile or session) — not a notification detail page; staff member can mark individual or all notifications as read
   4. Staff member can view their profile (name, role, facility, last login), edit display name, contact number, and notification preferences, and log out from the profile screen
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 06-01: Medical history screen with add/edit per section (wireframes required)
