@@ -5,23 +5,21 @@ import Link from 'next/link'
 import {
   ArrowLeft,
   Search,
-  SlidersHorizontal,
   Home,
   Users,
   Building2,
   FileText,
   UserCircle,
+  AlertTriangle,
+  User,
+  ClipboardList,
+  FolderOpen,
 } from 'lucide-react'
 import { db } from '@/lib/mock/db'
+import { COMMUNITIES, CLINICS } from '@/lib/mock/factories/mother.factory'
 import type { RiskLevel } from '@/lib/types/entities'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-
-const COMMUNITIES = [
-  'Nakuru Town', 'Naivasha', 'Gilgil', 'Molo', 'Njoro',
-  'Rongai', 'Subukia', 'Bahati', 'Laikipia East',
-  'Laikipia North', 'Laikipia West', 'Kuresoi North', 'Kuresoi South',
-]
 
 const NAV_ITEMS = [
   { icon: Home,       label: 'HOME',    href: '/dashboard',         active: false },
@@ -31,23 +29,24 @@ const NAV_ITEMS = [
   { icon: UserCircle, label: 'PROFILE', href: null,                 active: false },
 ]
 
+// Avatar background colors — rotate through these
+const AVATAR_COLORS = [
+  '#1B6B4A', '#E8527A', '#2563EB', '#F59E0B', '#7C3AED',
+  '#DC2626', '#0891B2', '#65A30D', '#C026D3', '#EA580C',
+]
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function getInitials(name: string): string {
+  const parts = name.split(' ')
+  if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+  return name.slice(0, 2).toUpperCase()
+}
 
 function getGestationalAge(lmpDate: string): { weeks: number; days: number } {
   const diffMs = Date.now() - new Date(lmpDate).getTime()
   const totalDays = Math.floor(diffMs / 86400000)
   return { weeks: Math.floor(totalDays / 7), days: totalDays % 7 }
-}
-
-function getAge(dateOfBirth: string): number {
-  const dob = new Date(dateOfBirth)
-  const today = new Date()
-  let age = today.getFullYear() - dob.getFullYear()
-  const monthDiff = today.getMonth() - dob.getMonth()
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-    age--
-  }
-  return age
 }
 
 function getTrimester(lmpDate: string): 1 | 2 | 3 {
@@ -57,23 +56,27 @@ function getTrimester(lmpDate: string): 1 | 2 | 3 {
   return 3
 }
 
+function getTrimesterLabel(t: 1 | 2 | 3): string {
+  if (t === 1) return '1st Trimester'
+  if (t === 2) return '2nd Trimester'
+  return '3rd Trimester'
+}
+
 function getRiskBadgeStyles(risk: RiskLevel): { bg: string; color: string; label: string } {
   switch (risk) {
     case 'high':
       return { bg: 'var(--color-risk-high-bg)', color: 'var(--color-risk-high)', label: 'High Risk' }
     case 'medium':
-      return { bg: 'var(--color-risk-medium-bg)', color: 'var(--color-risk-medium)', label: 'Medium' }
+      return { bg: 'var(--color-risk-medium-bg)', color: 'var(--color-risk-medium)', label: 'Normal' }
     case 'low':
-      return { bg: 'var(--color-risk-low-bg)', color: 'var(--color-risk-low)', label: 'Low Risk' }
+      return { bg: 'var(--color-risk-low-bg)', color: 'var(--color-risk-low)', label: 'Normal' }
   }
 }
 
-function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })
+function getAssignedMidwifeName(staffId: string): string {
+  const staff = db.staff.find((s) => s.id === staffId)
+  if (!staff) return 'Unknown'
+  return staff.name.split(' ')[0]
 }
 
 // Inline SVG chevron-down for <select> dropdown indicator
@@ -82,10 +85,11 @@ const CHEVRON_SVG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/200
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function MothersPage() {
-  const [searchQuery, setSearchQuery]     = useState('')
-  const [areaFilter, setAreaFilter]       = useState('')
+  const [searchQuery, setSearchQuery]         = useState('')
+  const [clinicFilter, setClinicFilter]       = useState('')
+  const [areaFilter, setAreaFilter]           = useState('')
   const [trimesterFilter, setTrimesterFilter] = useState('')
-  const [riskFilter, setRiskFilter]       = useState('')
+  const [riskFilter, setRiskFilter]           = useState('')
 
   const filteredMothers = useMemo(() => {
     return db.mothers.filter((m) => {
@@ -93,9 +97,11 @@ export default function MothersPage() {
       if (searchQuery) {
         const q = searchQuery.toLowerCase()
         const nameMatch = m.name.toLowerCase().includes(q)
-        const nicMatch  = m.nationalId.includes(searchQuery)
+        const nicMatch  = m.nationalId.toLowerCase().includes(q.toLowerCase())
         if (!nameMatch && !nicMatch) return false
       }
+      // Clinic filter
+      if (clinicFilter && m.assignedClinicId !== clinicFilter) return false
       // Area filter
       if (areaFilter && m.community !== areaFilter) return false
       // Trimester filter
@@ -104,11 +110,12 @@ export default function MothersPage() {
       if (riskFilter && m.riskLevel !== riskFilter) return false
       return true
     })
-  }, [searchQuery, areaFilter, trimesterFilter, riskFilter])
+  }, [searchQuery, clinicFilter, areaFilter, trimesterFilter, riskFilter])
 
-  const hasActiveFilters = areaFilter || trimesterFilter || riskFilter
+  const hasActiveFilters = clinicFilter || areaFilter || trimesterFilter || riskFilter
 
   function clearFilters() {
+    setClinicFilter('')
     setAreaFilter('')
     setTrimesterFilter('')
     setRiskFilter('')
@@ -155,7 +162,6 @@ export default function MothersPage() {
           borderBottom: '1px solid var(--color-border)',
         }}
       >
-        {/* Left: Back arrow */}
         <Link
           href="/dashboard"
           style={{
@@ -169,7 +175,6 @@ export default function MothersPage() {
           <ArrowLeft size={22} strokeWidth={1.5} />
         </Link>
 
-        {/* Center: Title */}
         <span
           style={{
             fontSize:   '18px',
@@ -180,21 +185,21 @@ export default function MothersPage() {
           Mothers
         </span>
 
-        {/* Right: Filter icon + EN badge + Avatar */}
         <div className="flex items-center" style={{ gap: 'var(--spacing-sm)' }}>
-          <SlidersHorizontal
-            size={20}
-            strokeWidth={1.5}
-            style={{ color: 'var(--color-on-surface-secondary)' }}
-          />
           <span
             style={{
-              fontSize:   '12px',
-              fontWeight: 500,
-              color:      'var(--color-on-surface-secondary)',
+              fontSize:      '12px',
+              fontWeight:    500,
+              color:         'var(--color-on-surface-secondary)',
+              background:    'var(--color-primary-light)',
+              paddingLeft:   'var(--spacing-sm)',
+              paddingRight:  'var(--spacing-sm)',
+              paddingTop:    '2px',
+              paddingBottom: '2px',
+              borderRadius:  'var(--radius-full)',
             }}
           >
-            EN
+            B/EN
           </span>
           <div
             className="flex items-center justify-center rounded-full"
@@ -228,31 +233,31 @@ export default function MothersPage() {
           <Search
             size={18}
             style={{
-              position:  'absolute',
-              left:      '12px',
-              top:       '50%',
-              transform: 'translateY(-50%)',
-              color:     'var(--color-on-surface-secondary)',
+              position:      'absolute',
+              left:          '12px',
+              top:           '50%',
+              transform:     'translateY(-50%)',
+              color:         'var(--color-on-surface-secondary)',
               pointerEvents: 'none',
             }}
           />
           <input
             type="text"
-            placeholder="Search by name or NIC..."
+            placeholder="Search by Name or NIC"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
-              width:           '100%',
-              height:          '44px',
-              paddingLeft:     '40px',
-              paddingRight:    'var(--spacing-md)',
-              background:      'var(--color-surface-secondary)',
-              borderRadius:    'var(--radius-xl)',
-              border:          '1px solid var(--color-border)',
-              fontSize:        '14px',
-              color:           'var(--color-on-surface)',
-              outline:         'none',
-              boxSizing:       'border-box',
+              width:        '100%',
+              height:       '44px',
+              paddingLeft:  '40px',
+              paddingRight: 'var(--spacing-md)',
+              background:   'var(--color-surface-secondary)',
+              borderRadius: 'var(--radius-xl)',
+              border:       '1px solid var(--color-border)',
+              fontSize:     '14px',
+              color:        'var(--color-on-surface)',
+              outline:      'none',
+              boxSizing:    'border-box',
             }}
           />
         </div>
@@ -271,6 +276,18 @@ export default function MothersPage() {
             scrollbarWidth:  'none',
           } as React.CSSProperties}
         >
+          {/* Clinic filter */}
+          <select
+            value={clinicFilter}
+            onChange={(e) => setClinicFilter(e.target.value)}
+            style={chipStyle(clinicFilter !== '')}
+          >
+            <option value="">Clinic</option>
+            {CLINICS.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+
           {/* Area filter */}
           <select
             value={areaFilter}
@@ -334,26 +351,44 @@ export default function MothersPage() {
           )}
         </div>
 
-        {/* Results count */}
+        {/* Section label */}
         <div
           style={{
-            marginTop:   'var(--spacing-sm)',
-            paddingLeft: 'var(--spacing-md)',
-            paddingRight:'var(--spacing-md)',
-            fontSize:    '12px',
-            color:       'var(--color-on-surface-secondary)',
+            fontSize:      '12px',
+            fontWeight:    600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color:         'var(--color-on-surface-secondary)',
+            marginTop:     'var(--spacing-md)',
+            paddingLeft:   'var(--spacing-md)',
+            paddingRight:  'var(--spacing-md)',
+            marginBottom:  'var(--spacing-sm)',
           }}
         >
-          {filteredMothers.length} mothers
+          Mother List
         </div>
 
         {/* Mother cards list */}
         <div style={{ paddingBottom: 'var(--spacing-lg)' }}>
-          {filteredMothers.map((mother) => {
-            const { weeks, days } = getGestationalAge(mother.lmpDate)
+          {filteredMothers.length === 0 && (
+            <div
+              style={{
+                textAlign:   'center',
+                padding:     'var(--spacing-xl)',
+                color:       'var(--color-on-surface-secondary)',
+                fontSize:    '14px',
+              }}
+            >
+              No mothers found matching your search or filters.
+            </div>
+          )}
+
+          {filteredMothers.map((mother, index) => {
             const trimester = getTrimester(mother.lmpDate)
-            const age = getAge(mother.dateOfBirth)
             const badge = getRiskBadgeStyles(mother.riskLevel)
+            const initials = getInitials(mother.name)
+            const avatarColor = AVATAR_COLORS[index % AVATAR_COLORS.length]
+            const midwifeName = getAssignedMidwifeName(mother.assignedStaffId)
 
             return (
               <div
@@ -361,7 +396,7 @@ export default function MothersPage() {
                 style={{
                   marginLeft:   'var(--spacing-md)',
                   marginRight:  'var(--spacing-md)',
-                  marginTop:    'var(--spacing-sm)',
+                  marginBottom: 'var(--spacing-sm)',
                   padding:      'var(--spacing-md)',
                   background:   'var(--color-surface)',
                   borderRadius: 'var(--radius-xl)',
@@ -369,17 +404,38 @@ export default function MothersPage() {
                   boxShadow:    'var(--shadow-sm)',
                 }}
               >
-                {/* Row 1: Name + Age | Risk badge */}
-                <div className="flex justify-between items-start">
-                  <div>
-                    <div
-                      style={{
-                        fontSize:   '14px',
-                        fontWeight: 600,
-                        color:      'var(--color-on-surface)',
-                      }}
-                    >
-                      {mother.name}
+                {/* Row 1: Avatar + Name/NIC + Risk badge */}
+                <div className="flex items-start" style={{ gap: 'var(--spacing-sm)' }}>
+                  {/* Avatar circle */}
+                  <div
+                    className="flex items-center justify-center rounded-full flex-shrink-0"
+                    style={{
+                      width:      '44px',
+                      height:     '44px',
+                      background: avatarColor,
+                      fontSize:   '14px',
+                      fontWeight: 600,
+                      color:      'white',
+                    }}
+                  >
+                    {initials}
+                  </div>
+
+                  {/* Name + NIC */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center" style={{ gap: '4px' }}>
+                      <span
+                        style={{
+                          fontSize:   '14px',
+                          fontWeight: 600,
+                          color:      'var(--color-on-surface)',
+                        }}
+                      >
+                        {mother.name}
+                      </span>
+                      {mother.riskLevel === 'high' && (
+                        <AlertTriangle size={14} style={{ color: 'var(--color-risk-high)', flexShrink: 0 }} />
+                      )}
                     </div>
                     <div
                       style={{
@@ -387,9 +443,11 @@ export default function MothersPage() {
                         color:    'var(--color-on-surface-secondary)',
                       }}
                     >
-                      {age} years old
+                      NIC: {mother.nationalId}
                     </div>
                   </div>
+
+                  {/* Risk badge */}
                   <span
                     style={{
                       paddingLeft:   'var(--spacing-sm)',
@@ -402,63 +460,106 @@ export default function MothersPage() {
                       background:    badge.bg,
                       color:         badge.color,
                       flexShrink:    0,
-                      marginLeft:    'var(--spacing-sm)',
+                      whiteSpace:    'nowrap',
                     }}
                   >
                     {badge.label}
                   </span>
                 </div>
 
-                {/* Row 2: Gestational age */}
+                {/* Row 2: Trimester + Assigned Midwife */}
                 <div
                   style={{
-                    marginTop: 'var(--spacing-xs)',
+                    marginTop: 'var(--spacing-sm)',
+                    fontSize:  '13px',
+                    color:     'var(--color-on-surface-secondary)',
                     display:   'flex',
-                    gap:       '4px',
-                    alignItems: 'baseline',
+                    gap:       'var(--spacing-md)',
                   }}
                 >
-                  <span
-                    style={{
-                      fontSize:   '14px',
-                      fontWeight: 600,
-                      color:      'var(--color-on-surface)',
-                    }}
-                  >
-                    {weeks}w {days}d
-                  </span>
-                  <span
-                    style={{
-                      fontSize: '13px',
-                      color:    'var(--color-on-surface-secondary)',
-                    }}
-                  >
-                    · Trimester {trimester}
-                  </span>
+                  <span>{getTrimesterLabel(trimester)}</span>
+                  <span>Assigned Midwife: {midwifeName}</span>
                 </div>
 
-                {/* Row 3: Community + Phone */}
+                {/* Row 3: Action buttons */}
                 <div
+                  className="flex"
                   style={{
-                    marginTop: 'var(--spacing-xs)',
-                    fontSize:  '12px',
-                    color:     'var(--color-on-surface-secondary)',
+                    marginTop: 'var(--spacing-sm)',
+                    gap:       'var(--spacing-sm)',
                   }}
                 >
-                  {mother.community} | {mother.phone}
-                </div>
+                  {/* View Profile — outlined */}
+                  <button
+                    type="button"
+                    className="flex items-center"
+                    style={{
+                      gap:           '4px',
+                      background:    'transparent',
+                      color:         'var(--color-primary)',
+                      border:        '1px solid var(--color-border)',
+                      borderRadius:  'var(--radius-full)',
+                      fontSize:      '12px',
+                      fontWeight:    500,
+                      paddingLeft:   'var(--spacing-sm)',
+                      paddingRight:  'var(--spacing-md)',
+                      paddingTop:    '6px',
+                      paddingBottom: '6px',
+                      cursor:        'pointer',
+                      whiteSpace:    'nowrap',
+                    }}
+                  >
+                    <User size={13} />
+                    View Profile
+                  </button>
 
-                {/* Row 4: Last visit */}
-                <div
-                  style={{
-                    marginTop: 'var(--spacing-xs)',
-                    fontSize:  '12px',
-                    color:     'var(--color-on-surface-secondary)',
-                  }}
-                >
-                  {mother.lastVisitDate
-                    ? `Last visit: ${formatDate(mother.lastVisitDate)}`
-                    : 'No visits yet'}
+                  {/* Record Visit — filled pink */}
+                  <button
+                    type="button"
+                    className="flex items-center"
+                    style={{
+                      gap:           '4px',
+                      background:    'var(--color-brand-pink)',
+                      color:         'white',
+                      border:        'none',
+                      borderRadius:  'var(--radius-full)',
+                      fontSize:      '12px',
+                      fontWeight:    500,
+                      paddingLeft:   'var(--spacing-sm)',
+                      paddingRight:  'var(--spacing-md)',
+                      paddingTop:    '6px',
+                      paddingBottom: '6px',
+                      cursor:        'pointer',
+                      whiteSpace:    'nowrap',
+                    }}
+                  >
+                    <ClipboardList size={13} />
+                    Record Visit
+                  </button>
+
+                  {/* Records — outlined */}
+                  <button
+                    type="button"
+                    className="flex items-center"
+                    style={{
+                      gap:           '4px',
+                      background:    'transparent',
+                      color:         'var(--color-on-surface-secondary)',
+                      border:        '1px solid var(--color-border)',
+                      borderRadius:  'var(--radius-full)',
+                      fontSize:      '12px',
+                      fontWeight:    500,
+                      paddingLeft:   'var(--spacing-sm)',
+                      paddingRight:  'var(--spacing-md)',
+                      paddingTop:    '6px',
+                      paddingBottom: '6px',
+                      cursor:        'pointer',
+                      whiteSpace:    'nowrap',
+                    }}
+                  >
+                    <FolderOpen size={13} />
+                    Records
+                  </button>
                 </div>
               </div>
             )
@@ -480,8 +581,8 @@ export default function MothersPage() {
         }}
       >
         {NAV_ITEMS.map((item) => {
-          const Icon         = item.icon
-          const activeColor  = 'var(--color-brand-pink)'
+          const Icon          = item.icon
+          const activeColor   = 'var(--color-brand-pink)'
           const inactiveColor = 'var(--color-on-surface-secondary)'
           const innerContent = (
             <>
