@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import {
   ArrowLeft,
@@ -14,6 +14,8 @@ import {
   User,
   ClipboardList,
   FolderOpen,
+  ChevronDown,
+  X,
 } from 'lucide-react'
 import { db } from '@/lib/mock/db'
 import { COMMUNITIES, CLINICS } from '@/lib/mock/factories/mother.factory'
@@ -79,8 +81,122 @@ function getAssignedMidwifeName(staffId: string): string {
   return staff.name.split(' ')[0]
 }
 
-// Inline SVG chevron-down for <select> dropdown indicator
-const CHEVRON_SVG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`
+// ─── FilterChip component ─────────────────────────────────────────────────────
+
+interface FilterChipProps {
+  label: string
+  value: string
+  options: { value: string; label: string }[]
+  onChange: (value: string) => void
+}
+
+function FilterChip({ label, value, options, onChange }: FilterChipProps) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const isActive = value !== ''
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    if (open) document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [open])
+
+  const displayLabel = isActive
+    ? options.find((o) => o.value === value)?.label ?? label
+    : label
+
+  return (
+    <div ref={ref} style={{ position: 'relative', flexShrink: 0 }}>
+      {/* Chip button */}
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex items-center"
+        style={{
+          gap:           '4px',
+          fontSize:      '13px',
+          fontWeight:    500,
+          paddingLeft:   'var(--spacing-md)',
+          paddingRight:  isActive ? '6px' : 'var(--spacing-sm)',
+          paddingTop:    '6px',
+          paddingBottom: '6px',
+          borderRadius:  'var(--radius-full)',
+          cursor:        'pointer',
+          whiteSpace:    'nowrap',
+          border:        isActive ? '1.5px solid var(--color-primary)' : '1px solid var(--color-border)',
+          background:    isActive ? 'var(--color-primary-light)' : 'var(--color-surface)',
+          color:         isActive ? 'var(--color-primary)' : 'var(--color-on-surface-secondary)',
+          outline:       'none',
+        }}
+      >
+        {displayLabel}
+        {isActive ? (
+          <span
+            onClick={(e) => { e.stopPropagation(); onChange(''); setOpen(false) }}
+            className="flex items-center justify-center rounded-full"
+            style={{
+              width:      '18px',
+              height:     '18px',
+              background: 'var(--color-primary)',
+              color:      'white',
+              cursor:     'pointer',
+              marginLeft: '2px',
+            }}
+          >
+            <X size={10} />
+          </span>
+        ) : (
+          <ChevronDown size={14} />
+        )}
+      </button>
+
+      {/* Dropdown panel */}
+      {open && (
+        <div
+          style={{
+            position:     'absolute',
+            top:          'calc(100% + 4px)',
+            left:         0,
+            minWidth:     '160px',
+            maxHeight:    '220px',
+            overflowY:    'auto',
+            background:   'var(--color-surface)',
+            borderRadius: 'var(--radius-lg)',
+            border:       '1px solid var(--color-border)',
+            boxShadow:    'var(--shadow-md)',
+            zIndex:       50,
+            padding:      'var(--spacing-xs) 0',
+          }}
+        >
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => { onChange(opt.value); setOpen(false) }}
+              style={{
+                display:       'block',
+                width:         '100%',
+                textAlign:     'left',
+                padding:       'var(--spacing-sm) var(--spacing-md)',
+                fontSize:      '13px',
+                color:         opt.value === value ? 'var(--color-primary)' : 'var(--color-on-surface)',
+                fontWeight:    opt.value === value ? 600 : 400,
+                background:    opt.value === value ? 'var(--color-primary-light)' : 'transparent',
+                border:        'none',
+                cursor:        'pointer',
+                whiteSpace:    'nowrap',
+              }}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -93,20 +209,15 @@ export default function MothersPage() {
 
   const filteredMothers = useMemo(() => {
     return db.mothers.filter((m) => {
-      // Search: match name (case-insensitive) or nationalId (contains)
       if (searchQuery) {
         const q = searchQuery.toLowerCase()
         const nameMatch = m.name.toLowerCase().includes(q)
         const nicMatch  = m.nationalId.toLowerCase().includes(q.toLowerCase())
         if (!nameMatch && !nicMatch) return false
       }
-      // Clinic filter
       if (clinicFilter && m.assignedClinicId !== clinicFilter) return false
-      // Area filter
       if (areaFilter && m.community !== areaFilter) return false
-      // Trimester filter
       if (trimesterFilter && getTrimester(m.lmpDate) !== Number(trimesterFilter)) return false
-      // Risk filter
       if (riskFilter && m.riskLevel !== riskFilter) return false
       return true
     })
@@ -114,39 +225,12 @@ export default function MothersPage() {
 
   const hasActiveFilters = clinicFilter || areaFilter || trimesterFilter || riskFilter
 
-  function clearFilters() {
+  const clearFilters = useCallback(() => {
     setClinicFilter('')
     setAreaFilter('')
     setTrimesterFilter('')
     setRiskFilter('')
-  }
-
-  // Shared chip select styles
-  function chipStyle(isActive: boolean): React.CSSProperties {
-    return {
-      appearance: 'none' as const,
-      fontSize: '13px',
-      fontWeight: 500,
-      paddingLeft: 'var(--spacing-md)',
-      paddingRight: 'var(--spacing-lg)',
-      paddingTop: 'var(--spacing-xs)',
-      paddingBottom: 'var(--spacing-xs)',
-      borderRadius: 'var(--radius-full)',
-      cursor: 'pointer',
-      whiteSpace: 'nowrap' as const,
-      border: isActive ? 'none' : '1px solid var(--color-border)',
-      background: isActive ? 'var(--color-primary)' : 'transparent',
-      color: isActive ? 'white' : 'var(--color-on-surface-secondary)',
-      backgroundImage: isActive
-        ? `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`
-        : CHEVRON_SVG,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'right 10px center',
-      backgroundSize: '12px',
-      outline: 'none',
-      flexShrink: 0,
-    }
-  }
+  }, [])
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
@@ -276,77 +360,64 @@ export default function MothersPage() {
             scrollbarWidth:  'none',
           } as React.CSSProperties}
         >
-          {/* Clinic filter */}
-          <select
+          <FilterChip
+            label="Clinic"
             value={clinicFilter}
-            onChange={(e) => setClinicFilter(e.target.value)}
-            style={chipStyle(clinicFilter !== '')}
-          >
-            <option value="">Clinic</option>
-            {CLINICS.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-
-          {/* Area filter */}
-          <select
+            options={CLINICS.map((c) => ({ value: c, label: c }))}
+            onChange={setClinicFilter}
+          />
+          <FilterChip
+            label="Area"
             value={areaFilter}
-            onChange={(e) => setAreaFilter(e.target.value)}
-            style={chipStyle(areaFilter !== '')}
-          >
-            <option value="">Area</option>
-            {COMMUNITIES.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-
-          {/* Trimester filter */}
-          <select
+            options={COMMUNITIES.map((c) => ({ value: c, label: c }))}
+            onChange={setAreaFilter}
+          />
+          <FilterChip
+            label="Trimester"
             value={trimesterFilter}
-            onChange={(e) => setTrimesterFilter(e.target.value)}
-            style={chipStyle(trimesterFilter !== '')}
-          >
-            <option value="">Trimester</option>
-            <option value="1">1st Trimester</option>
-            <option value="2">2nd Trimester</option>
-            <option value="3">3rd Trimester</option>
-          </select>
-
-          {/* Risk Level filter */}
-          <select
+            options={[
+              { value: '1', label: '1st Trimester' },
+              { value: '2', label: '2nd Trimester' },
+              { value: '3', label: '3rd Trimester' },
+            ]}
+            onChange={setTrimesterFilter}
+          />
+          <FilterChip
+            label="Risk Level"
             value={riskFilter}
-            onChange={(e) => setRiskFilter(e.target.value)}
-            style={chipStyle(riskFilter !== '')}
-          >
-            <option value="">Risk Level</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
+            options={[
+              { value: 'high', label: 'High' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'low', label: 'Low' },
+            ]}
+            onChange={setRiskFilter}
+          />
 
-          {/* Clear chip */}
+          {/* Clear all */}
           {hasActiveFilters && (
             <button
               type="button"
               onClick={clearFilters}
+              className="flex items-center"
               style={{
-                appearance:    'none',
+                gap:           '4px',
                 fontSize:      '13px',
                 fontWeight:    500,
                 paddingLeft:   'var(--spacing-md)',
-                paddingRight:  'var(--spacing-md)',
-                paddingTop:    'var(--spacing-xs)',
-                paddingBottom: 'var(--spacing-xs)',
+                paddingRight:  'var(--spacing-sm)',
+                paddingTop:    '6px',
+                paddingBottom: '6px',
                 borderRadius:  'var(--radius-full)',
                 cursor:        'pointer',
                 whiteSpace:    'nowrap',
                 border:        '1px solid var(--color-risk-high)',
-                background:    'transparent',
+                background:    'var(--color-risk-high-bg)',
                 color:         'var(--color-risk-high)',
                 flexShrink:    0,
               }}
             >
-              Clear
+              Clear All
+              <X size={14} />
             </button>
           )}
         </div>
