@@ -22,7 +22,7 @@ decisions:
 metrics:
   duration_minutes: 15
   completed_date: "2026-03-19"
-  tasks_completed: 2
+  tasks_completed: 3
   tasks_total: 3
   files_created: 1
   files_modified: 1
@@ -38,7 +38,7 @@ metrics:
 |---|------|--------|--------|
 | 1 | Build Mothers screen with search, filters, and mother cards | 89bbd80 | Complete |
 | 2 | Update dashboard bottom nav to link to Mothers page | 8bc0f0d | Complete |
-| 3 | Human verification checkpoint | — | Awaiting |
+| 3 | Human verification checkpoint | — | Complete (approved) |
 
 ## What Was Built
 
@@ -86,23 +86,8 @@ None — plan executed exactly as written.
 
 ## Self-Check: PASSED
 
-## Awaiting Human Verification
+## Human Verification
 
-Checkpoint: `checkpoint:human-verify`
+Checkpoint: `checkpoint:human-verify` — Approved by user on 2026-03-19.
 
-Steps to verify:
-1. Run `npm run dev` and open http://localhost:3000/dashboard
-2. Tap the MOTHERS icon in bottom nav — should navigate to /dashboard/mothers
-3. Verify header shows back arrow, "Mothers" title, filter icon, EN badge, pink avatar
-4. Verify search bar with placeholder "Search by name or NIC..."
-5. Type a name fragment — list should filter reactively
-6. Type a NIC number — list should filter by national ID
-7. Clear search, use Area dropdown — pick a community, list filters
-8. Use Trimester dropdown — pick 2nd Trimester, list filters
-9. Use Risk Level dropdown — pick High, list filters
-10. Verify multiple filters combine (AND logic) — count updates
-11. Tap "Clear" chip — all filters reset, full list shows
-12. Verify each mother card shows: name, age, risk badge (color-coded), gestational age (weeks+days), trimester, community, phone, last visit date
-13. Scroll the list — should scroll smoothly with bottom nav staying fixed
-14. Tap back arrow — should navigate to dashboard
-15. Check on iPhone 16 Pro viewport (393x852) in DevTools — no overflow or layout issues
+All verification steps confirmed. Mothers screen functions correctly on iPhone 16 Pro viewport.
