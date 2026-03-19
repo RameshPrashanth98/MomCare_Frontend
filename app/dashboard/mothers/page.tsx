@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
   ArrowLeft,
   Search,
@@ -222,6 +223,7 @@ function FilterChip({ label, value, options, onChange }: FilterChipProps) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function MothersPage() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery]         = useState('')
   const [clinicFilter, setClinicFilter]       = useState('')
   const [areaFilter, setAreaFilter]           = useState('')
@@ -664,6 +666,7 @@ export default function MothersPage() {
       {/* ── Floating Action Button (+ Register Mother) ────────────────────── */}
       <button
         type="button"
+        onClick={() => router.push('/dashboard/mothers/register')}
         className="flex items-center justify-center rounded-full"
         style={{
           position:   'absolute',
