@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: "Completed quick task 260319-l0z: Update Mothers screen with Sri Lankan data and wireframe card layout"
 last_updated: "2026-03-19T09:38:00.000Z"
-last_activity: 2026-03-19 — Completed quick task 260319-l9c: Fix filter chips UI with custom dropdown chips
+last_activity: 2026-03-19 — Completed quick task 260319-mfg: Fix filter dropdowns and add FAB plus button
 progress:
   total_phases: 6
   completed_phases: 0
@@ -88,6 +88,7 @@ None yet.
 | 260319-kip | Build Mothers screen with search, filters, and mother cards | 2026-03-19 | 8bc0f0d | [260319-kip-build-mothers-screen-with-search-filters](./quick/260319-kip-build-mothers-screen-with-search-filters/) |
 | 260319-l0z | Update Mothers screen with Sri Lankan names, areas, NIC on cards, and wireframe card layout | 2026-03-19 | 99c795c | [260319-l0z-update-mothers-screen-with-sri-lankan-na](./quick/260319-l0z-update-mothers-screen-with-sri-lankan-na/) |
 | 260319-l9c | Fix filter chips UI — replace native selects with custom dropdown chips | 2026-03-19 | b856d83 | [260319-l9c-fix-filter-chips-ui-replace-native-selec](./quick/260319-l9c-fix-filter-chips-ui-replace-native-selec/) |
+| 260319-mfg | Fix filter dropdowns (portal) and add FAB plus button to Mothers screen | 2026-03-19 | 51d6045 | [260319-mfg-fix-filters-and-add-fab-plus-button-to-m](./quick/260319-mfg-fix-filters-and-add-fab-plus-button-to-m/) |
 
 ### Blockers/Concerns
 
@@ -99,5 +100,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-19T09:48:00.000Z
-Stopped at: Completed quick task 260319-l9c: Fix filter chips UI with custom dropdown chips
+Stopped at: Completed quick task 260319-mfg: Fix filter dropdowns and add FAB plus button
 Resume file: None
