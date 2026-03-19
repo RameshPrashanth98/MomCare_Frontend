@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import {
   ArrowLeft,
@@ -16,6 +17,7 @@ import {
   FolderOpen,
   ChevronDown,
   X,
+  Plus,
 } from 'lucide-react'
 import { db } from '@/lib/mock/db'
 import { COMMUNITIES, CLINICS } from '@/lib/mock/factories/mother.factory'
@@ -92,12 +94,29 @@ interface FilterChipProps {
 
 function FilterChip({ label, value, options, onChange }: FilterChipProps) {
   const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const chipRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0 })
   const isActive = value !== ''
 
+  // Position dropdown below the chip using portal (avoids overflow clipping)
+  useEffect(() => {
+    if (open && chipRef.current) {
+      const rect = chipRef.current.getBoundingClientRect()
+      setDropdownPos({ top: rect.bottom + 4, left: rect.left })
+    }
+  }, [open])
+
+  // Click outside to close
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+      const target = e.target as Node
+      if (
+        chipRef.current && !chipRef.current.contains(target) &&
+        dropdownRef.current && !dropdownRef.current.contains(target)
+      ) {
+        setOpen(false)
+      }
     }
     if (open) document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
@@ -108,7 +127,7 @@ function FilterChip({ label, value, options, onChange }: FilterChipProps) {
     : label
 
   return (
-    <div ref={ref} style={{ position: 'relative', flexShrink: 0 }}>
+    <div ref={chipRef} style={{ flexShrink: 0 }}>
       {/* Chip button */}
       <button
         type="button"
@@ -152,13 +171,14 @@ function FilterChip({ label, value, options, onChange }: FilterChipProps) {
         )}
       </button>
 
-      {/* Dropdown panel */}
-      {open && (
+      {/* Dropdown panel — rendered via portal to escape overflow:auto parent */}
+      {open && typeof document !== 'undefined' && createPortal(
         <div
+          ref={dropdownRef}
           style={{
-            position:     'absolute',
-            top:          'calc(100% + 4px)',
-            left:         0,
+            position:     'fixed',
+            top:          dropdownPos.top,
+            left:         dropdownPos.left,
             minWidth:     '160px',
             maxHeight:    '220px',
             overflowY:    'auto',
@@ -166,7 +186,7 @@ function FilterChip({ label, value, options, onChange }: FilterChipProps) {
             borderRadius: 'var(--radius-lg)',
             border:       '1px solid var(--color-border)',
             boxShadow:    'var(--shadow-md)',
-            zIndex:       50,
+            zIndex:       100,
             padding:      'var(--spacing-xs) 0',
           }}
         >
@@ -192,7 +212,8 @@ function FilterChip({ label, value, options, onChange }: FilterChipProps) {
               {opt.label}
             </button>
           ))}
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   )
@@ -233,7 +254,7 @@ export default function MothersPage() {
   }, [])
 
   return (
-    <div className="flex flex-col h-dvh overflow-hidden">
+    <div className="flex flex-col h-dvh overflow-hidden" style={{ position: 'relative' }}>
 
       {/* ── Header ──────────────────────────────────────────────────────────── */}
       <div
@@ -639,6 +660,27 @@ export default function MothersPage() {
 
       </div>
       {/* ── End scrollable content ──────────────────────────────────────────── */}
+
+      {/* ── Floating Action Button (+ Register Mother) ────────────────────── */}
+      <button
+        type="button"
+        className="flex items-center justify-center rounded-full"
+        style={{
+          position:   'absolute',
+          bottom:     '80px',
+          right:      'var(--spacing-md)',
+          width:      '52px',
+          height:     '52px',
+          background: 'var(--color-brand-pink)',
+          color:      'white',
+          border:     'none',
+          boxShadow:  'var(--shadow-lg)',
+          cursor:     'pointer',
+          zIndex:     40,
+        }}
+      >
+        <Plus size={24} strokeWidth={2.5} />
+      </button>
 
       {/* ── Bottom Navigation Bar ───────────────────────────────────────────── */}
       <div
