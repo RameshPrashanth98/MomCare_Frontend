@@ -20,8 +20,8 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 | Onboarding (4 screens) | ✅ Built |
 | Login | ✅ Built |
 | Home / Dashboard | ✅ Built |
-| Notifications | 🔜 Planned |
-| Mothers List | 🔜 Planned |
+| Notifications | ✅ Built |
+| Mothers List | ✅ Built |
 | Mother Profile | 🔜 Planned |
 | Medical History | 🔜 Planned |
 | Clinic Schedule | 🔜 Planned |
@@ -72,6 +72,8 @@ momcare/
 │   │   ├── layout.tsx    # Phone shell wrapper
 │   │   └── login/        # Login screen
 │   ├── dashboard/        # Home / Dashboard screen
+│   │   ├── mothers/      # Mothers list (search, filters, cards)
+│   │   └── notifications/# Notifications feed (4 card types)
 │   ├── onboarding/       # Onboarding flow (4 steps)
 │   ├── splash/           # Splash screen with auto-redirect
 │   ├── globals.css       # Design tokens (@theme block)
@@ -126,10 +128,12 @@ npm run test:run     # Vitest (single run)
 
 ```
 / (root)
- └─► /splash          Auto-redirects after 2s
-      └─► /onboarding  4-step intro, "Get Started" or "Skip"
-           └─► /login   Staff ID + password form
-                └─► /dashboard   Home screen (authenticated)
+ └─► /splash              Auto-redirects after 2s
+      └─► /onboarding      4-step intro, "Get Started" or "Skip"
+           └─► /login       Staff ID + password form
+                └─► /dashboard          Home screen (authenticated)
+                     ├─► /notifications  Notifications feed (bell icon)
+                     └─► /mothers        Mothers list (bottom nav)
 ```
 
 ---
