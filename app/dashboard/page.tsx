@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Bell, Globe, AlertTriangle, Home, Users, Building2, FileText, UserCircle, Plus, Stethoscope, Syringe, ChevronRight } from 'lucide-react'
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
@@ -71,7 +72,9 @@ export default function DashboardPage() {
           </span>
 
           <div className="flex items-center" style={{ gap: 'var(--spacing-sm)' }}>
-            <Bell size={22} strokeWidth={1.5} style={{ color: 'var(--color-brand-pink)' }} />
+            <Link href="/dashboard/notifications">
+              <Bell size={22} strokeWidth={1.5} style={{ color: 'var(--color-brand-pink)' }} />
+            </Link>
             {/* Pink avatar */}
             <div
               className="flex items-center justify-center rounded-full"
