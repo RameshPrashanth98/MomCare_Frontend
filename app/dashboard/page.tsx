@@ -484,9 +484,56 @@ export default function DashboardPage() {
         }}
       >
         {NAV_ITEMS.map((item) => {
-          const Icon = item.icon
+          const Icon          = item.icon
           const activeColor   = 'var(--color-brand-pink)'
           const inactiveColor = 'var(--color-on-surface-secondary)'
+          const innerContent  = (
+            <>
+              <Icon
+                size={22}
+                // Only the active HOME icon gets a filled appearance
+                fill={item.active ? 'currentColor' : 'none'}
+              />
+              <span style={{ fontSize: '10px', fontWeight: 500 }}>{item.label}</span>
+            </>
+          )
+
+          if (item.label === 'HOME') {
+            return (
+              <Link
+                key={item.label}
+                href="/dashboard"
+                className="flex flex-col items-center"
+                style={{
+                  gap:            '2px',
+                  color:          item.active ? activeColor : inactiveColor,
+                  textDecoration: 'none',
+                  padding:        '4px 8px',
+                }}
+              >
+                {innerContent}
+              </Link>
+            )
+          }
+
+          if (item.label === 'MOTHERS') {
+            return (
+              <Link
+                key={item.label}
+                href="/dashboard/mothers"
+                className="flex flex-col items-center"
+                style={{
+                  gap:            '2px',
+                  color:          item.active ? activeColor : inactiveColor,
+                  textDecoration: 'none',
+                  padding:        '4px 8px',
+                }}
+              >
+                {innerContent}
+              </Link>
+            )
+          }
+
           return (
             <button
               key={item.label}
@@ -501,12 +548,7 @@ export default function DashboardPage() {
                 padding:    '4px 8px',
               }}
             >
-              <Icon
-                size={22}
-                // Only the active HOME icon gets a filled appearance
-                fill={item.active ? 'currentColor' : 'none'}
-              />
-              <span style={{ fontSize: '10px', fontWeight: 500 }}>{item.label}</span>
+              {innerContent}
             </button>
           )
         })}
