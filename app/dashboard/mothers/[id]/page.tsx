@@ -30,7 +30,7 @@ import type { RiskLevel, Mother, Visit, WeightRecord } from '@/lib/types/entitie
 const NAV_ITEMS = [
   { icon: Home,       label: 'HOME',    href: '/dashboard',         active: false },
   { icon: Users,      label: 'MOTHERS', href: '/dashboard/mothers', active: true  },
-  { icon: Building2,  label: 'CLINICS', href: null,                 active: false },
+  { icon: Building2,  label: 'CLINICS', href: '/dashboard/clinics', active: false },
   { icon: FileText,   label: 'RECORDS', href: null,                 active: false },
   { icon: UserCircle, label: 'PROFILE', href: null,                 active: false },
 ]
@@ -505,17 +505,20 @@ export default function MotherProfilePage() {
           </div>
 
           {/* ── Medical History ───────────────────────────────────────────────── */}
-          <div style={cardStyle}>
+          <div
+            style={cardStyle}
+            onClick={() => router.push(`/dashboard/mothers/${motherId}/medical-history`)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === 'Enter') router.push(`/dashboard/mothers/${motherId}/medical-history`) }}
+          >
             <div style={sectionHeaderStyle}>Medical History</div>
 
             {/* Previous Pregnancies */}
-            <button
-              type="button"
+            <div
               className="flex items-center justify-between w-full"
               style={{
                 padding:       'var(--spacing-sm) 0',
-                background:    'none',
-                border:        'none',
                 cursor:        'pointer',
                 borderBottom:  '1px solid var(--color-border)',
               }}
@@ -525,16 +528,13 @@ export default function MotherProfilePage() {
                 <span style={{ fontSize: '13px', color: 'var(--color-on-surface)' }}>Previous Pregnancies</span>
               </div>
               <ChevronRight size={18} style={{ color: 'var(--color-on-surface-secondary)' }} />
-            </button>
+            </div>
 
             {/* Known Complications */}
-            <button
-              type="button"
+            <div
               className="flex items-center justify-between w-full"
               style={{
                 padding:       'var(--spacing-sm) 0',
-                background:    'none',
-                border:        'none',
                 cursor:        'pointer',
                 borderBottom:  '1px solid var(--color-border)',
               }}
@@ -544,16 +544,13 @@ export default function MotherProfilePage() {
                 <span style={{ fontSize: '13px', color: 'var(--color-on-surface)' }}>Known Complications</span>
               </div>
               <ChevronRight size={18} style={{ color: 'var(--color-on-surface-secondary)' }} />
-            </button>
+            </div>
 
             {/* Risk Notes */}
-            <button
-              type="button"
+            <div
               className="flex items-center justify-between w-full"
               style={{
                 padding:    'var(--spacing-sm) 0',
-                background: 'none',
-                border:     'none',
                 cursor:     'pointer',
               }}
             >
@@ -562,7 +559,7 @@ export default function MotherProfilePage() {
                 <span style={{ fontSize: '13px', color: 'var(--color-on-surface)' }}>Risk Notes</span>
               </div>
               <ChevronRight size={18} style={{ color: 'var(--color-on-surface-secondary)' }} />
-            </button>
+            </div>
           </div>
 
           {/* ── Clinic Visit History ──────────────────────────────────────────── */}

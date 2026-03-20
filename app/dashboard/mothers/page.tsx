@@ -29,7 +29,7 @@ import type { RiskLevel } from '@/lib/types/entities'
 const NAV_ITEMS = [
   { icon: Home,       label: 'HOME',    href: '/dashboard',         active: false },
   { icon: Users,      label: 'MOTHERS', href: '/dashboard/mothers', active: true  },
-  { icon: Building2,  label: 'CLINICS', href: null,                 active: false },
+  { icon: Building2,  label: 'CLINICS', href: '/dashboard/clinics', active: false },
   { icon: FileText,   label: 'RECORDS', href: null,                 active: false },
   { icon: UserCircle, label: 'PROFILE', href: null,                 active: false },
 ]

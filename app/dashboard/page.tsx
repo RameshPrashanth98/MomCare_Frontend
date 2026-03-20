@@ -33,11 +33,11 @@ const UPCOMING_APPOINTMENTS = [
 ]
 
 const NAV_ITEMS = [
-  { icon: Home,       label: 'HOME',    active: true  },
-  { icon: Users,      label: 'MOTHERS', active: false },
-  { icon: Building2,  label: 'CLINICS', active: false },
-  { icon: FileText,   label: 'RECORDS', active: false },
-  { icon: UserCircle, label: 'PROFILE', active: false },
+  { icon: Home,       label: 'HOME',    href: '/dashboard',         active: true  },
+  { icon: Users,      label: 'MOTHERS', href: '/dashboard/mothers', active: false },
+  { icon: Building2,  label: 'CLINICS', href: '/dashboard/clinics', active: false },
+  { icon: FileText,   label: 'RECORDS', href: null,                 active: false },
+  { icon: UserCircle, label: 'PROFILE', href: null,                 active: false },
 ]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -515,36 +515,17 @@ export default function DashboardPage() {
             <>
               <Icon
                 size={22}
-                // Only the active HOME icon gets a filled appearance
                 fill={item.active ? 'currentColor' : 'none'}
               />
               <span style={{ fontSize: '10px', fontWeight: 500 }}>{item.label}</span>
             </>
           )
 
-          if (item.label === 'HOME') {
+          if (item.href) {
             return (
               <Link
                 key={item.label}
-                href="/dashboard"
-                className="flex flex-col items-center"
-                style={{
-                  gap:            '2px',
-                  color:          item.active ? activeColor : inactiveColor,
-                  textDecoration: 'none',
-                  padding:        '4px 8px',
-                }}
-              >
-                {innerContent}
-              </Link>
-            )
-          }
-
-          if (item.label === 'MOTHERS') {
-            return (
-              <Link
-                key={item.label}
-                href="/dashboard/mothers"
+                href={item.href}
                 className="flex flex-col items-center"
                 style={{
                   gap:            '2px',
@@ -565,7 +546,7 @@ export default function DashboardPage() {
               className="flex flex-col items-center"
               style={{
                 gap:        '2px',
-                color:      item.active ? activeColor : inactiveColor,
+                color:      inactiveColor,
                 background: 'none',
                 border:     'none',
                 cursor:     'pointer',
