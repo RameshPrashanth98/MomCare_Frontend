@@ -161,4 +161,4 @@ npm run test:run     # Vitest (single run)
 
 ---
 
-*Built with the [GSD workflow](https://github.com/anthropics/claude-code) · Ministry of Health, Sri Lanka · v1.0*
+*Built with the [GSD workflow](https://github.com/anthropics/claude-code) · 
