@@ -24,8 +24,8 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 | Mothers List | ✅ Built |
 | Register Mother | ✅ Built |
 | Mother Profile | ✅ Built |
-| Medical History | 🔜 Planned |
-| Clinic Schedule | 🔜 Planned |
+| Medical History | ✅ Built |
+| Clinic Schedule | ✅ Built |
 | Clinic Session Detail | 🔜 Planned |
 | Register Clinic Visit | 🔜 Planned |
 | Add Clinic Session | 🔜 Planned |
@@ -73,8 +73,10 @@ momcare/
 │   │   ├── layout.tsx    # Phone shell wrapper
 │   │   └── login/        # Login screen
 │   ├── dashboard/        # Home / Dashboard screen
+│   │   ├── clinics/      # Clinic Schedule (day selector, session cards)
 │   │   ├── mothers/      # Mothers list (search, filters, cards)
 │   │   │   ├── [id]/     # Mother Profile (health, history, visits)
+│   │   │   │   └── medical-history/  # Medical History (pregnancies, conditions, attachments)
 │   │   │   └── register/ # Register Mother form
 │   │   └── notifications/# Notifications feed (4 card types)
 │   ├── onboarding/       # Onboarding flow (4 steps)
@@ -136,9 +138,11 @@ npm run test:run     # Vitest (single run)
            └─► /login       Staff ID + password form
                 └─► /dashboard          Home screen (authenticated)
                      ├─► /notifications  Notifications feed (bell icon)
+                     ├─► /clinics        Clinic Schedule (bottom nav)
                      └─► /mothers        Mothers list (bottom nav)
                           ├─► /mothers/register   Register new mother
                           └─► /mothers/[id]       Mother Profile (from card or high-risk)
+                               └─► /mothers/[id]/medical-history  Medical History
 ```
 
 ---
