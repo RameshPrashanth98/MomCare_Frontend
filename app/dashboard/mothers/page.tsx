@@ -586,6 +586,7 @@ export default function MothersPage() {
                   {/* View Profile — outlined */}
                   <button
                     type="button"
+                    onClick={() => router.push(`/dashboard/mothers/${mother.id}`)}
                     className="flex items-center"
                     style={{
                       gap:           '4px',

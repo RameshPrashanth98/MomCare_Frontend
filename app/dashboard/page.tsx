@@ -1,7 +1,10 @@
 'use client'
 
+import { useMemo } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Bell, Globe, AlertTriangle, Home, Users, Building2, FileText, UserCircle, Plus, Stethoscope, Syringe, ChevronRight } from 'lucide-react'
+import { db } from '@/lib/mock/db'
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 
@@ -24,11 +27,6 @@ const TODAYS_CLINICS = [
   { name: 'Clinic B', time: '11:00 AM', badge: 'Scheduled', badgeType: 'green' as const },
 ]
 
-const HIGH_RISK_MOTHERS = [
-  { name: 'Nadeesha Silva', condition: 'High Blood Pressure',  midwife: 'Midwife: Malani'  },
-  { name: 'Kavitha Perera', condition: 'Gestational Diabetes', midwife: 'Midwife: Nirmala' },
-]
-
 const UPCOMING_APPOINTMENTS = [
   { name: 'Samanthi Perera', clinic: 'Clinic A', time: '9:15 AM'  },
   { name: 'Kavitha Silva',   clinic: 'Clinic B', time: '10:00 AM' },
@@ -45,6 +43,27 @@ const NAV_ITEMS = [
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function DashboardPage() {
+  const router = useRouter()
+
+  // Get real high-risk mothers from mock DB
+  const highRiskMothers = useMemo(() => {
+    return db.mothers
+      .filter((m) => m.riskLevel === 'high')
+      .slice(0, 4)
+      .map((m) => {
+        const staff = db.staff.find((s) => s.id === m.assignedStaffId)
+        const midwifeName = staff ? staff.name.split(' ')[0] : 'Unknown'
+        // Derive a condition from the mother's data
+        const latestVisit = db.visits
+          .filter((v) => v.motherId === m.id)
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
+        const condition = latestVisit?.bloodPressureSystolic && latestVisit.bloodPressureSystolic >= 140
+          ? 'High Blood Pressure'
+          : latestVisit?.presentingComplaints?.[0] || 'High Risk Pregnancy'
+        return { id: m.id, name: m.name, condition, midwife: `Midwife: ${midwifeName}` }
+      })
+  }, [])
+
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
 
@@ -271,15 +290,20 @@ export default function DashboardPage() {
               scrollbarWidth:     'none',
             } as React.CSSProperties}
           >
-            {HIGH_RISK_MOTHERS.map((mother) => (
+            {highRiskMothers.map((mother) => (
               <div
-                key={mother.name}
+                key={mother.id}
+                onClick={() => router.push(`/dashboard/mothers/${mother.id}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter') router.push(`/dashboard/mothers/${mother.id}`) }}
                 style={{
                   minWidth:     '260px',
                   borderRadius: 'var(--radius-xl)',
                   padding:      'var(--spacing-md)',
                   background:   'var(--color-risk-high-bg)',
                   flexShrink:   0,
+                  cursor:       'pointer',
                 }}
               >
                 {/* Row 1: icon + name */}
