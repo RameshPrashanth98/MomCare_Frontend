@@ -22,7 +22,8 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 | Home / Dashboard | ✅ Built |
 | Notifications | ✅ Built |
 | Mothers List | ✅ Built |
-| Mother Profile | 🔜 Planned |
+| Register Mother | ✅ Built |
+| Mother Profile | ✅ Built |
 | Medical History | 🔜 Planned |
 | Clinic Schedule | 🔜 Planned |
 | Clinic Session Detail | 🔜 Planned |
@@ -73,6 +74,8 @@ momcare/
 │   │   └── login/        # Login screen
 │   ├── dashboard/        # Home / Dashboard screen
 │   │   ├── mothers/      # Mothers list (search, filters, cards)
+│   │   │   ├── [id]/     # Mother Profile (health, history, visits)
+│   │   │   └── register/ # Register Mother form
 │   │   └── notifications/# Notifications feed (4 card types)
 │   ├── onboarding/       # Onboarding flow (4 steps)
 │   ├── splash/           # Splash screen with auto-redirect
@@ -134,6 +137,8 @@ npm run test:run     # Vitest (single run)
                 └─► /dashboard          Home screen (authenticated)
                      ├─► /notifications  Notifications feed (bell icon)
                      └─► /mothers        Mothers list (bottom nav)
+                          ├─► /mothers/register   Register new mother
+                          └─► /mothers/[id]       Mother Profile (from card or high-risk)
 ```
 
 ---
