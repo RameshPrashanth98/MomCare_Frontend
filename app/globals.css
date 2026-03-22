@@ -85,18 +85,66 @@
 }
 
 /* Splash screen animations */
-@keyframes splash-fade-in {
-  from {
+@keyframes splash-logo-enter {
+  0% {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.3);
+    filter: blur(8px);
   }
-  to {
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: blur(0px);
+  }
+  70% {
+    transform: scale(0.96);
+  }
+  100% {
     opacity: 1;
     transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes splash-text-slide {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+    letter-spacing: 0.3em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0.12em;
+  }
+}
+
+@keyframes splash-pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes splash-fade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
   }
 }
 
 @keyframes splash-shimmer {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  50% { opacity: 0.85; }
 }
