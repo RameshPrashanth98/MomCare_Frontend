@@ -90,7 +90,7 @@ function WelcomeScreen({ onGetStarted }: { onGetStarted: () => void }) {
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: 393,
+        maxWidth: 430,
         minHeight: '100dvh',
         display: 'flex',
         flexDirection: 'column',
@@ -314,7 +314,7 @@ function FeatureScreen({
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: 393,
+        maxWidth: 430,
         minHeight: '100dvh',
         display: 'flex',
         flexDirection: 'column',
