@@ -1,13 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import IllustrationWelcome from '@/components/onboarding/illustrations/IllustrationWelcome'
 import IllustrationMothers from '@/components/onboarding/illustrations/IllustrationMothers'
 import IllustrationSessions from '@/components/onboarding/illustrations/IllustrationSessions'
 import IllustrationHealth from '@/components/onboarding/illustrations/IllustrationHealth'
 
-const FEATURE_SCREENS = [
+const SCREENS = [
+  {
+    title: 'Welcome to the\nMaternal Health Clinic System',
+    description:
+      'Helping healthcare workers manage maternal clinics, patient records, and antenatal care efficiently.',
+    illustration: IllustrationWelcome,
+  },
   {
     title: 'Manage Pregnant Mothers',
     description:
@@ -28,7 +34,7 @@ const FEATURE_SCREENS = [
   },
 ]
 
-/* ── Shared: medical cross rounded-square icon ── */
+/* ── Medical cross icon ── */
 function AppIcon({ size = 80 }: { size?: number }) {
   const radius = size * 0.22
   return (
@@ -45,13 +51,11 @@ function AppIcon({ size = 80 }: { size?: number }) {
         flexShrink: 0,
       }}
     >
-      {/* White medical cross */}
       <svg
         width={size * 0.46}
         height={size * 0.46}
         viewBox="0 0 40 40"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <rect x="15" y="4" width="10" height="32" rx="4" fill="white" />
         <rect x="4" y="15" width="32" height="10" rx="4" fill="white" />
@@ -60,16 +64,16 @@ function AppIcon({ size = 80 }: { size?: number }) {
   )
 }
 
-/* ── Shared: pagination dots ── */
+/* ── Pagination dots ── */
 function PaginationDots({ total, current }: { total: number; current: number }) {
   return (
-    <div style={{ display: 'flex', gap: 6, justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
       {Array.from({ length: total }).map((_, i) => (
         <div
           key={i}
           style={{
             height: 8,
-            width: i === current ? 20 : 8,
+            width: i === current ? 22 : 8,
             borderRadius: 9999,
             backgroundColor:
               i === current
@@ -83,415 +87,21 @@ function PaginationDots({ total, current }: { total: number; current: number }) 
   )
 }
 
-/* ── Welcome Screen (step 0) ── */
-function WelcomeScreen({ onGetStarted }: { onGetStarted: () => void }) {
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        maxWidth: 430,
-        minHeight: '100dvh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        overflow: 'hidden',
-        paddingBottom: 32,
-      }}
-    >
-      {/* Decorative circle — top right (clipped) */}
-      <div
-        style={{
-          position: 'absolute',
-          top: -48,
-          right: -48,
-          width: 160,
-          height: 160,
-          borderRadius: '50%',
-          backgroundColor: 'rgba(232,82,122,0.12)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Decorative circle — bottom left */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 60,
-          left: -36,
-          width: 110,
-          height: 110,
-          borderRadius: '50%',
-          backgroundColor: 'rgba(232,82,122,0.09)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* Content column */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '100%',
-          padding: '56px 24px 0',
-          flex: 1,
-          gap: 0,
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
-        {/* App icon */}
-        <AppIcon size={80} />
-
-        {/* App name */}
-        <p
-          style={{
-            fontSize: 26,
-            fontWeight: 700,
-            color: 'var(--color-brand-pink)',
-            marginTop: 14,
-            marginBottom: 2,
-            letterSpacing: '-0.3px',
-          }}
-        >
-          MomCare
-        </p>
-        <p
-          style={{
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            color: 'var(--color-on-surface-secondary)',
-            marginBottom: 24,
-          }}
-        >
-          CLINIC MANAGEMENT
-        </p>
-
-        {/* Illustration card */}
-        <div
-          style={{
-            width: '100%',
-            maxWidth: 330,
-            borderRadius: 20,
-            backgroundColor: 'var(--color-illustration-bg)',
-            boxShadow: '0 4px 20px rgba(232,82,122,0.10)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '12px 8px',
-            overflow: 'hidden',
-          }}
-        >
-          <IllustrationWelcome />
-        </div>
-
-        {/* Category badge */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            marginTop: 20,
-            marginBottom: 10,
-          }}
-        >
-          <div
-            style={{
-              width: 7,
-              height: 7,
-              borderRadius: '50%',
-              backgroundColor: 'var(--color-brand-pink)',
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontSize: 13,
-              fontWeight: 500,
-              color: 'var(--color-brand-pink)',
-            }}
-          >
-            Maternal Healthcare
-          </span>
-        </div>
-
-        {/* Title */}
-        <h1
-          style={{
-            fontSize: 27,
-            fontWeight: 700,
-            color: 'var(--color-on-surface)',
-            textAlign: 'center',
-            lineHeight: 1.28,
-            marginBottom: 12,
-            letterSpacing: '-0.4px',
-          }}
-        >
-          Welcome to the{'\n'}Maternal Health Clinic
-        </h1>
-
-        {/* Description */}
-        <p
-          style={{
-            fontSize: 14,
-            color: 'var(--color-on-surface-secondary)',
-            textAlign: 'center',
-            lineHeight: 1.6,
-            marginBottom: 28,
-            paddingLeft: 4,
-            paddingRight: 4,
-          }}
-        >
-          Helping healthcare workers manage maternal clinics, patient records, and antenatal care efficiently.
-        </p>
-
-        {/* Get Started button */}
-        <button
-          onClick={onGetStarted}
-          style={{
-            width: '100%',
-            height: 54,
-            borderRadius: 9999,
-            backgroundColor: 'var(--color-brand-pink)',
-            color: 'white',
-            fontWeight: 600,
-            fontSize: 16,
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 8,
-            boxShadow: '0 4px 16px rgba(232,82,122,0.35)',
-            marginBottom: 20,
-          }}
-        >
-          Get Started
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path
-              d="M3.75 9H14.25M14.25 9L10.5 5.25M14.25 9L10.5 12.75"
-              stroke="white"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-
-        {/* Pagination dots */}
-        <PaginationDots total={4} current={0} />
-      </div>
-    </div>
-  )
-}
-
-/* ── Feature Screens (steps 1-3) ── */
-function FeatureScreen({
-  step,
-  title,
-  description,
-  IllustrationComponent,
-  onGetStarted,
-  onNext,
-  onBack,
-  onSkip,
-  isLast,
-}: {
-  step: number
-  title: string
-  description: string
-  IllustrationComponent: React.ComponentType
-  onGetStarted: () => void
-  onNext: () => void
-  onBack: () => void
-  onSkip: () => void
-  isLast: boolean
-}) {
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        maxWidth: 430,
-        minHeight: '100dvh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        overflow: 'hidden',
-        paddingBottom: 32,
-      }}
-    >
-      {/* Content */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '100%',
-          padding: '52px 24px 0',
-          flex: 1,
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
-        {/* Small app icon */}
-        <AppIcon size={48} />
-
-        {/* Screen title */}
-        <h2
-          style={{
-            fontSize: 22,
-            fontWeight: 700,
-            color: 'var(--color-on-surface)',
-            textAlign: 'center',
-            marginTop: 16,
-            marginBottom: 20,
-            lineHeight: 1.25,
-            letterSpacing: '-0.3px',
-          }}
-        >
-          {title}
-        </h2>
-
-        {/* Illustration */}
-        <div
-          style={{
-            width: '100%',
-            maxWidth: 330,
-            borderRadius: 20,
-            backgroundColor: 'var(--color-illustration-bg)',
-            boxShadow: '0 4px 20px rgba(232,82,122,0.10)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '12px 8px',
-            overflow: 'hidden',
-            marginBottom: 24,
-          }}
-        >
-          <IllustrationComponent />
-        </div>
-
-        {/* Description */}
-        <p
-          style={{
-            fontSize: 15,
-            color: 'var(--color-on-surface-secondary)',
-            textAlign: 'center',
-            lineHeight: 1.6,
-            marginBottom: 28,
-            paddingLeft: 4,
-            paddingRight: 4,
-          }}
-        >
-          {description}
-        </p>
-
-        {/* Get Started button */}
-        <button
-          onClick={onGetStarted}
-          style={{
-            width: '100%',
-            height: 52,
-            borderRadius: 14,
-            backgroundColor: 'var(--color-brand-pink)',
-            color: 'white',
-            fontWeight: 600,
-            fontSize: 16,
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(232,82,122,0.3)',
-            marginBottom: 20,
-          }}
-        >
-          Get Started
-        </button>
-
-        {/* Pagination dots */}
-        <PaginationDots total={4} current={step} />
-
-        {/* Navigation row */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-            marginTop: 20,
-          }}
-        >
-          {/* Left nav */}
-          {step === 1 ? (
-            <button
-              onClick={onSkip}
-              style={{
-                fontSize: 14,
-                fontWeight: 500,
-                color: 'var(--color-on-surface-secondary)',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '4px 0',
-              }}
-            >
-              Skip
-            </button>
-          ) : (
-            <button
-              onClick={onBack}
-              style={{
-                fontSize: 14,
-                fontWeight: 500,
-                color: 'var(--color-on-surface-secondary)',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '4px 0',
-              }}
-            >
-              &lt; Back
-            </button>
-          )}
-
-          {/* Right nav */}
-          {!isLast ? (
-            <button
-              onClick={onNext}
-              style={{
-                fontSize: 14,
-                fontWeight: 600,
-                color: 'var(--color-brand-pink)',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '4px 0',
-              }}
-            >
-              Next &gt;
-            </button>
-          ) : (
-            <span />
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ── Main Page ── */
 export default function OnboardingPage() {
   const [step, setStep] = useState(0)
+  const [animKey, setAnimKey] = useState(0)
   const router = useRouter()
 
   const goToLogin = () => router.push('/login')
 
-  const featureIndex = step - 1 // 0-based index into FEATURE_SCREENS
-  const featureScreen = step > 0 ? FEATURE_SCREENS[featureIndex] : null
+  const goToStep = useCallback((next: number) => {
+    setAnimKey((k) => k + 1)
+    setStep(next)
+  }, [])
+
+  const screen = SCREENS[step]
+  const Illustration = screen.illustration
+  const isLast = step === SCREENS.length - 1
 
   return (
     <div
@@ -501,27 +111,229 @@ export default function OnboardingPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background:
-          'radial-gradient(ellipse at center, var(--color-splash-bg-center) 0%, var(--color-splash-bg-mid) 50%, var(--color-splash-bg-edge) 100%)',
+        background: '#FFFFFF',
       }}
     >
-      {step === 0 && (
-        <WelcomeScreen onGetStarted={() => setStep(1)} />
-      )}
-
-      {step > 0 && featureScreen && (
-        <FeatureScreen
-          step={step}
-          title={featureScreen.title}
-          description={featureScreen.description}
-          IllustrationComponent={featureScreen.illustration}
-          onGetStarted={goToLogin}
-          onNext={() => setStep(step + 1)}
-          onBack={() => setStep(step - 1)}
-          onSkip={goToLogin}
-          isLast={step === 3}
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: 430,
+          minHeight: '100dvh',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          background: '#FFFFFF',
+        }}
+      >
+        {/* Decorative circle — top right */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -50,
+            right: -50,
+            width: 170,
+            height: 170,
+            borderRadius: '50%',
+            backgroundColor: 'rgba(232,82,122,0.10)',
+            pointerEvents: 'none',
+          }}
         />
-      )}
+
+        {/* Content */}
+        <div
+          key={animKey}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+            padding: '56px 24px 0',
+            flex: 1,
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          {/* App icon — animated entrance */}
+          <div
+            style={{
+              animation: 'onb-icon-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards',
+              opacity: 0,
+            }}
+          >
+            <AppIcon size={72} />
+          </div>
+
+          {/* Illustration card — animated */}
+          <div
+            style={{
+              width: '100%',
+              maxWidth: 340,
+              borderRadius: 20,
+              backgroundColor: 'var(--color-illustration-bg)',
+              boxShadow: '0 4px 24px rgba(232,82,122,0.08)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '16px 8px',
+              overflow: 'hidden',
+              marginTop: 20,
+              animation: 'onb-illus-enter 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s forwards',
+              opacity: 0,
+            }}
+          >
+            <div
+              style={{
+                animation: 'onb-illus-float 4s ease-in-out 1s infinite',
+              }}
+            >
+              <Illustration />
+            </div>
+          </div>
+
+          {/* Title — animated */}
+          <h1
+            style={{
+              fontSize: 26,
+              fontWeight: 700,
+              color: 'var(--color-on-surface)',
+              textAlign: 'center',
+              lineHeight: 1.3,
+              letterSpacing: '-0.4px',
+              marginTop: 28,
+              marginBottom: 12,
+              whiteSpace: 'pre-line',
+              animation: 'onb-text-up 0.6s ease-out 0.35s forwards',
+              opacity: 0,
+            }}
+          >
+            {screen.title}
+          </h1>
+
+          {/* Description — animated */}
+          <p
+            style={{
+              fontSize: 14,
+              color: 'var(--color-on-surface-secondary)',
+              textAlign: 'center',
+              lineHeight: 1.7,
+              paddingLeft: 8,
+              paddingRight: 8,
+              animation: 'onb-text-up 0.6s ease-out 0.5s forwards',
+              opacity: 0,
+            }}
+          >
+            {screen.description}
+          </p>
+
+          {/* Spacer */}
+          <div style={{ flex: 1, minHeight: 24 }} />
+
+          {/* Get Started button — animated */}
+          <button
+            onClick={goToLogin}
+            style={{
+              width: '100%',
+              height: 54,
+              borderRadius: 16,
+              backgroundColor: 'var(--color-brand-pink)',
+              color: 'white',
+              fontWeight: 600,
+              fontSize: 16,
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              boxShadow: '0 4px 16px rgba(232,82,122,0.30)',
+              animation: 'onb-btn-up 0.5s ease-out 0.6s forwards',
+              opacity: 0,
+            }}
+          >
+            Get Started
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path
+                d="M3.75 9H14.25M14.25 9L10.5 5.25M14.25 9L10.5 12.75"
+                stroke="white"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          {/* Bottom nav row */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+              marginTop: 24,
+              paddingBottom: 32,
+              animation: 'onb-fade-in 0.4s ease-out 0.7s forwards',
+              opacity: 0,
+            }}
+          >
+            {/* Skip / Back */}
+            <button
+              onClick={step === 0 ? goToLogin : () => goToStep(step - 1)}
+              style={{
+                fontSize: 14,
+                fontWeight: 500,
+                color: 'var(--color-on-surface-secondary)',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '4px 0',
+                minWidth: 50,
+                textAlign: 'left',
+              }}
+            >
+              {step === 0 ? 'Skip' : 'Back'}
+            </button>
+
+            {/* Dots */}
+            <PaginationDots total={SCREENS.length} current={step} />
+
+            {/* Next */}
+            {!isLast ? (
+              <button
+                onClick={() => goToStep(step + 1)}
+                style={{
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: 'var(--color-brand-pink)',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '4px 0',
+                  minWidth: 50,
+                  textAlign: 'right',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  gap: 4,
+                }}
+              >
+                Next
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5.25 3.5L8.75 7L5.25 10.5"
+                    stroke="var(--color-brand-pink)"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            ) : (
+              <span style={{ minWidth: 50 }} />
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

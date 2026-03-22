@@ -16,8 +16,8 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 
 | Screen | Status |
 |--------|--------|
-| Splash (animated logo) | ✅ Built |
-| Onboarding (4 screens) | ✅ Built |
+| Splash (animated logo, 9s duration) | ✅ Built |
+| Onboarding (4 screens, animated illustrations) | ✅ Built |
 | Login | ✅ Built |
 | Home / Dashboard | ✅ Built |
 | Notifications | ✅ Built |

@@ -84,119 +84,207 @@
   --safe-area-right: env(safe-area-inset-right, 0px);
 }
 
-/* Splash screen animations */
-@keyframes splash-logo-enter {
+/* Onboarding screen animations */
+@keyframes onb-icon-pop {
   0% {
     opacity: 0;
-    transform: scale(0) rotate(-15deg);
-    filter: blur(12px);
-  }
-  40% {
-    opacity: 1;
-    transform: scale(1.12) rotate(2deg);
-    filter: blur(0px);
+    transform: scale(0.4) rotate(-10deg);
   }
   60% {
-    transform: scale(0.95) rotate(-1deg);
-  }
-  80% {
-    transform: scale(1.03) rotate(0deg);
+    opacity: 1;
+    transform: scale(1.1) rotate(2deg);
   }
   100% {
     opacity: 1;
     transform: scale(1) rotate(0deg);
-    filter: blur(0px);
   }
 }
 
-@keyframes splash-logo-float {
+@keyframes onb-illus-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes onb-illus-float {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
 }
 
-@keyframes splash-text-slide {
+@keyframes onb-text-up {
   0% {
     opacity: 0;
-    transform: translateY(20px);
-    letter-spacing: 0.35em;
+    transform: translateY(18px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    letter-spacing: 0.15em;
   }
 }
 
-@keyframes splash-line-expand {
+@keyframes onb-shimmer-sweep {
+  0% { left: -100%; }
+  50% { left: 120%; }
+  100% { left: 120%; }
+}
+
+@keyframes onb-heart-float {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  15% { opacity: 0.9; transform: translateY(-4px) scale(1); }
+  50% { opacity: 1; transform: translateY(-14px) scale(1.1); }
+  85% { opacity: 0.7; transform: translateY(-20px) scale(0.9); }
+  100% { opacity: 0; transform: translateY(-26px) scale(0.5); }
+}
+
+@keyframes onb-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+  20% { opacity: 1; transform: scale(1) rotate(15deg); }
+  40% { opacity: 1; transform: scale(0.8) rotate(-10deg); }
+  60% { opacity: 0.8; transform: scale(1.1) rotate(10deg); }
+  80% { opacity: 0.4; transform: scale(0.6) rotate(-5deg); }
+}
+
+@keyframes onb-pulse-dot {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232,82,122,0.5); }
+  50% { transform: scale(1.2); box-shadow: 0 0 0 6px rgba(232,82,122,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232,82,122,0); }
+}
+
+@keyframes onb-cross-float {
+  0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+  20% { opacity: 0.7; transform: translateY(-6px) rotate(10deg); }
+  50% { opacity: 0.5; transform: translateY(-16px) rotate(-5deg); }
+  80% { opacity: 0.3; transform: translateY(-24px) rotate(8deg); }
+  100% { opacity: 0; transform: translateY(-30px) rotate(0deg); }
+}
+
+@keyframes onb-check-pop {
+  0%, 70% { opacity: 0; transform: scale(0); }
+  80% { opacity: 1; transform: scale(1.2); }
+  85% { transform: scale(0.9); }
+  90% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes onb-glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.95); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes onb-heartbeat {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220,38,38,0.5); }
+  15% { transform: scale(1.3); box-shadow: 0 0 0 4px rgba(220,38,38,0); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); box-shadow: 0 0 0 3px rgba(220,38,38,0); }
+  60% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+}
+
+@keyframes onb-trend-up {
+  0% { opacity: 0; transform: translateY(8px) scale(0.8); }
+  20% { opacity: 1; transform: translateY(0) scale(1); }
+  80% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-6px) scale(0.9); }
+}
+
+@keyframes onb-btn-up {
   0% {
     opacity: 0;
-    transform: scaleX(0);
+    transform: translateY(14px);
   }
   100% {
     opacity: 1;
-    transform: scaleX(1);
+    transform: translateY(0);
   }
 }
 
-@keyframes splash-pulse-ring {
+@keyframes onb-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Splash screen animations */
+@keyframes splash-logo-in {
   0% {
-    transform: scale(0.8);
     opacity: 0;
+    transform: scale(0.6);
+    filter: blur(8px);
   }
-  30% {
-    opacity: 0.3;
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: blur(0px);
+  }
+  70% {
+    transform: scale(0.97);
   }
   100% {
-    transform: scale(2);
-    opacity: 0;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
   }
 }
 
-@keyframes splash-glow-breathe {
+@keyframes splash-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes splash-tagline-in {
   0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-glow {
+  0%, 100% {
     opacity: 0;
     transform: scale(0.9);
   }
   50% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes splash-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.2;
   }
   100% {
+    transform: scale(2.2);
     opacity: 0;
-    transform: scale(0.9);
   }
 }
 
-@keyframes splash-float-0 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-  25% { transform: translate(30px, -20px) scale(1.2); opacity: 0.7; }
-  50% { transform: translate(-10px, -40px) scale(0.8); opacity: 0.5; }
-  75% { transform: translate(-30px, -10px) scale(1.1); opacity: 0.6; }
-}
-
-@keyframes splash-float-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-  33% { transform: translate(-25px, -30px) scale(1.3); opacity: 0.6; }
-  66% { transform: translate(20px, -15px) scale(0.9); opacity: 0.4; }
-}
-
-@keyframes splash-float-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-  30% { transform: translate(15px, -35px) scale(0.7); opacity: 0.3; }
-  60% { transform: translate(-20px, -20px) scale(1.4); opacity: 0.7; }
-}
-
-@keyframes splash-fade-out {
+@keyframes splash-exit {
   0% {
     opacity: 1;
     transform: scale(1);
   }
   100% {
     opacity: 0;
-    transform: scale(1.08);
+    transform: scale(1.05);
   }
 }
