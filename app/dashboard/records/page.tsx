@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
   ArrowLeft,
   Search,
@@ -87,6 +88,7 @@ const ACTION_BUTTONS = [
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function SearchRecordsPage() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
 
   const filteredMothers = useMemo(() => {
@@ -355,6 +357,7 @@ export default function SearchRecordsPage() {
                       <button
                         key={btn.label}
                         type="button"
+                        onClick={btn.label === 'Vaccination' ? () => router.push(`/dashboard/records/${mother.id}/vaccination`) : undefined}
                         className="flex items-center justify-center"
                         style={{
                           gap:           '4px',
