@@ -1,4 +1,4 @@
-import type { Staff, Mother, Visit, Vaccination, WeightRecord, ClinicSession, LabReport } from '../types/entities'
+import type { Staff, Mother, Visit, Vaccination, WeightRecord, ClinicSession, LabReport, TimelineEvent } from '../types/entities'
 import { createStaff } from './factories/staff.factory'
 import { createMother } from './factories/mother.factory'
 import { createVisit } from './factories/visit.factory'
@@ -6,6 +6,7 @@ import { createVaccination } from './factories/vaccination.factory'
 import { createWeightRecord } from './factories/weight.factory'
 import { createClinicSession } from './factories/session.factory'
 import { createLabReport } from './factories/lab-report.factory'
+import { createTimelineEvent, createUpcomingMilestone } from './factories/timeline.factory'
 import { faker } from './seed'
 
 // ── Staff (10 members) ────────────────────────────────────────────────────────
@@ -83,6 +84,22 @@ const labReports: LabReport[] = mothers.flatMap((mother) => {
   })
 })
 
+// ── Timeline events (4–8 per mother, with 1–2 upcoming milestones) ────────────
+const timelineEvents: TimelineEvent[] = mothers.flatMap((mother) => {
+  const pastCount = faker.number.int({ min: 3, max: 6 })
+  const upcomingCount = faker.number.int({ min: 1, max: 2 })
+  const staffId = faker.helpers.arrayElement(staffIds)
+
+  const pastEvents = Array.from({ length: pastCount }, () =>
+    createTimelineEvent(mother.id, staffId)
+  )
+  const upcomingEvents = Array.from({ length: upcomingCount }, () =>
+    createUpcomingMilestone(mother.id, staffId)
+  )
+
+  return [...pastEvents, ...upcomingEvents]
+})
+
 // ── Clinic sessions (20 total) ────────────────────────────────────────────────
 const sessions: ClinicSession[] = Array.from({ length: 20 }, () => {
   const leadClinicianId = faker.helpers.arrayElement(staffIds)
@@ -100,5 +117,6 @@ export const db = {
   vaccinations,
   weightRecords,
   labReports,
+  timelineEvents,
   sessions,
 }

@@ -97,3 +97,16 @@ export interface LabReport {
   uploadedBy: string
   createdByStaffId: string
 }
+
+export type TimelineEventType = 'clinic-visit' | 'vaccination' | 'ultrasound' | 'lab-report'
+
+export interface TimelineEvent {
+  id: string
+  motherId: string
+  date: string           // ISO date
+  type: TimelineEventType
+  title: string          // e.g. "Clinic Visit Recorded", "Tetanus Vaccine (TT1)"
+  detail: string         // e.g. "Weight: 62 kg | BP: 120/80", "Dose Administered"
+  isUpcoming: boolean    // true = future milestone, false = past event
+  createdByStaffId: string
+}
