@@ -360,6 +360,7 @@ export default function SearchRecordsPage() {
                         onClick={
                           btn.label === 'Vaccination' ? () => router.push(`/dashboard/records/${mother.id}/vaccination`) :
                           btn.label === 'Health Tracking' ? () => router.push(`/dashboard/records/${mother.id}/health-tracking`) :
+                          btn.label === 'Lab Reports' ? () => router.push(`/dashboard/records/${mother.id}/lab-reports`) :
                           undefined
                         }
                         className="flex items-center justify-center"
