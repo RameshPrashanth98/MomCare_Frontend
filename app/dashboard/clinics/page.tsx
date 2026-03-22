@@ -388,26 +388,27 @@ export default function ClinicsPage() {
               }}
             >
               {/* View Session — outlined */}
-              <button
-                type="button"
+              <Link
+                href="/dashboard/clinics/1"
                 className="flex items-center justify-center"
                 style={{
-                  flex:          1,
-                  gap:           '4px',
-                  height:        '34px',
-                  background:    'transparent',
-                  color:         'var(--color-brand-pink)',
-                  border:        '1.5px solid var(--color-brand-pink)',
-                  borderRadius:  'var(--radius-full)',
-                  fontSize:      '12px',
-                  fontWeight:    500,
-                  cursor:        'pointer',
-                  whiteSpace:    'nowrap',
+                  flex:           1,
+                  gap:            '4px',
+                  height:         '34px',
+                  background:     'transparent',
+                  color:          'var(--color-brand-pink)',
+                  border:         '1.5px solid var(--color-brand-pink)',
+                  borderRadius:   'var(--radius-full)',
+                  fontSize:       '12px',
+                  fontWeight:     500,
+                  cursor:         'pointer',
+                  whiteSpace:     'nowrap',
+                  textDecoration: 'none',
                 }}
               >
                 <Eye size={13} />
                 View Session
-              </button>
+              </Link>
 
               {/* Start Clinic — filled pink */}
               <button
