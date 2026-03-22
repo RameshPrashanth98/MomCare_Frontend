@@ -457,29 +457,30 @@ export default function ClinicsPage() {
         ))}
 
         {/* + Add Clinic Session button */}
-        <button
-          type="button"
+        <Link
+          href="/dashboard/clinics/add"
           className="flex items-center justify-center"
           style={{
-            width:        'calc(100% - 2 * var(--spacing-md))',
-            marginLeft:   'var(--spacing-md)',
-            marginRight:  'var(--spacing-md)',
-            marginTop:    'var(--spacing-md)',
-            marginBottom: 'var(--spacing-md)',
-            height:       '44px',
-            border:       '1.5px dashed var(--color-brand-pink)',
-            color:        'var(--color-brand-pink)',
-            background:   'transparent',
-            borderRadius: 'var(--radius-xl)',
-            fontSize:     '14px',
-            fontWeight:   500,
-            cursor:       'pointer',
-            gap:          'var(--spacing-xs)',
+            width:          'calc(100% - 2 * var(--spacing-md))',
+            marginLeft:     'var(--spacing-md)',
+            marginRight:    'var(--spacing-md)',
+            marginTop:      'var(--spacing-md)',
+            marginBottom:   'var(--spacing-md)',
+            height:         '44px',
+            border:         '1.5px dashed var(--color-brand-pink)',
+            color:          'var(--color-brand-pink)',
+            background:     'transparent',
+            borderRadius:   'var(--radius-xl)',
+            fontSize:       '14px',
+            fontWeight:     500,
+            cursor:         'pointer',
+            gap:            'var(--spacing-xs)',
+            textDecoration: 'none',
           }}
         >
           <Plus size={16} />
           Add Clinic Session
-        </button>
+        </Link>
 
       </div>
       {/* ── End scrollable content ──────────────────────────────────────────── */}
