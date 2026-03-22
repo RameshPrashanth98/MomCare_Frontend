@@ -26,14 +26,14 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 | Mother Profile | ✅ Built |
 | Medical History | ✅ Built |
 | Clinic Schedule | ✅ Built |
-| Clinic Session Detail | 🔜 Planned |
+| Add Clinic Session | ✅ Built |
+| Clinic Session Detail | ✅ Built |
+| User Profile | ✅ Built |
 | Register Clinic Visit | 🔜 Planned |
-| Add Clinic Session | 🔜 Planned |
 | Search Records | 🔜 Planned |
 | Vaccination Records | 🔜 Planned |
 | Weight & Health Tracking | 🔜 Planned |
 | Pregnancy Timeline | 🔜 Planned |
-| User Profile | 🔜 Planned |
 
 ---
 
@@ -74,11 +74,14 @@ momcare/
 │   │   └── login/        # Login screen
 │   ├── dashboard/        # Home / Dashboard screen
 │   │   ├── clinics/      # Clinic Schedule (day selector, session cards)
+│   │   │   ├── add/      # Add Clinic Session form
+│   │   │   └── [id]/     # Clinic Session Detail (mothers, actions)
 │   │   ├── mothers/      # Mothers list (search, filters, cards)
 │   │   │   ├── [id]/     # Mother Profile (health, history, visits)
 │   │   │   │   └── medical-history/  # Medical History (pregnancies, conditions, attachments)
 │   │   │   └── register/ # Register Mother form
-│   │   └── notifications/# Notifications feed (4 card types)
+│   │   ├── notifications/# Notifications feed (4 card types)
+│   │   └── profile/      # User Profile (account, preferences, quick access)
 │   ├── onboarding/       # Onboarding flow (4 steps)
 │   ├── splash/           # Splash screen with auto-redirect
 │   ├── globals.css       # Design tokens (@theme block)
@@ -139,17 +142,20 @@ npm run test:run     # Vitest (single run)
                 └─► /dashboard          Home screen (authenticated)
                      ├─► /notifications  Notifications feed (bell icon)
                      ├─► /clinics        Clinic Schedule (bottom nav)
-                     └─► /mothers        Mothers list (bottom nav)
-                          ├─► /mothers/register   Register new mother
-                          └─► /mothers/[id]       Mother Profile (from card or high-risk)
-                               └─► /mothers/[id]/medical-history  Medical History
+                     │    ├─► /clinics/add       Add Clinic Session form
+                     │    └─► /clinics/[id]      Clinic Session Detail (View Session)
+                     ├─► /mothers        Mothers list (bottom nav)
+                     │    ├─► /mothers/register   Register new mother
+                     │    └─► /mothers/[id]       Mother Profile (from card or high-risk)
+                     │         └─► /mothers/[id]/medical-history  Medical History
+                     └─► /profile        User Profile (bottom nav)
 ```
 
 ---
 
 ## Design Principles
 
-- **Mobile-first**: Optimised for iPhone 16 Pro (393×852pt); all screens are full-height mobile views
+- **Mobile-first & responsive**: Designed with iPhone 16 Pro (393×852pt) as the reference baseline; fully responsive across all mobile devices (320px–430px), capped at 430px on tablet/desktop
 - **Design token only**: Zero hardcoded style values — all from `--color-*`, `--spacing-*`, `--radius-*`, `--shadow-*` CSS variables
 - **Mock data**: All entities (mothers, clinics, appointments) use realistic fake data; `lib/api/` abstraction enables future real-API swap without touching components
 - **Wireframe-driven**: Each screen is implemented from a provided wireframe — no screen is built without one
