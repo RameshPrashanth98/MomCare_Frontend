@@ -357,7 +357,11 @@ export default function SearchRecordsPage() {
                       <button
                         key={btn.label}
                         type="button"
-                        onClick={btn.label === 'Vaccination' ? () => router.push(`/dashboard/records/${mother.id}/vaccination`) : undefined}
+                        onClick={
+                          btn.label === 'Vaccination' ? () => router.push(`/dashboard/records/${mother.id}/vaccination`) :
+                          btn.label === 'Health Tracking' ? () => router.push(`/dashboard/records/${mother.id}/health-tracking`) :
+                          undefined
+                        }
                         className="flex items-center justify-center"
                         style={{
                           gap:           '4px',
