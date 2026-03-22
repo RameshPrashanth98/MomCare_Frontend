@@ -16,7 +16,7 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 
 | Screen | Status |
 |--------|--------|
-| Splash | ✅ Built |
+| Splash (animated logo) | ✅ Built |
 | Onboarding (4 screens) | ✅ Built |
 | Login | ✅ Built |
 | Home / Dashboard | ✅ Built |
@@ -143,7 +143,7 @@ npm run test:run     # Vitest (single run)
 
 ```
 / (root)
- └─► /splash              Auto-redirects after 2s
+ └─► /splash              Animated logo, auto-redirects after 3s
       └─► /onboarding      4-step intro, "Get Started" or "Skip"
            └─► /login       Staff ID + password form
                 └─► /dashboard          Home screen (authenticated)
