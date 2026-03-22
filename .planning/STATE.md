@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: "Completed quick task 260322-x8y: Build Pregnancy Timeline screen"
 last_updated: "2026-03-20T00:00:00.000Z"
-last_activity: 2026-03-23 — Completed quick task 260323-08i: Push all pending changes to GitHub and update README
+last_activity: 2026-03-23 — Completed quick task 260323-0dp: Modify splash screen with MomCare logo animation
 progress:
   total_phases: 6
   completed_phases: 0
@@ -103,6 +103,7 @@ None yet.
 | 260322-n2c | Push all pending changes to GitHub | 2026-03-22 | 0f1c414 | [260322-n2c-push-all-pending-changes-to-github](./quick/260322-n2c-push-all-pending-changes-to-github/) |
 | 260322-x8y | Build Pregnancy Timeline screen with vertical timeline and milestones | 2026-03-22 | bd86d54 | [260322-x8y-build-pregnancy-timeline-screen-with-ver](./quick/260322-x8y-build-pregnancy-timeline-screen-with-ver/) |
 | 260323-08i | Push all pending changes to GitHub and update README | 2026-03-23 | 2fc5624 | [260323-08i-push-all-pending-changes-to-github-and-u](./quick/260323-08i-push-all-pending-changes-to-github-and-u/) |
+| 260323-0dp | Modify splash screen with MomCare logo animation on white background | 2026-03-23 | 4b4bf11 | [260323-0dp-modify-splash-screen-with-momcare-logo-a](./quick/260323-0dp-modify-splash-screen-with-momcare-logo-a/) |
 
 ### Blockers/Concerns
 
