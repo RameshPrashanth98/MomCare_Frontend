@@ -85,3 +85,15 @@ export interface ClinicSession {
   attendeeMotherIds: string[] // resolves to Mother.id[]
   notes: string
 }
+
+export type LabReportType = 'blood-test' | 'urine-test' | 'ultrasound'
+
+export interface LabReport {
+  id: string
+  motherId: string
+  type: LabReportType
+  reportName: string
+  date: string // ISO date
+  uploadedBy: string
+  createdByStaffId: string
+}

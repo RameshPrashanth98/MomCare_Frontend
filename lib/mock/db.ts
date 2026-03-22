@@ -1,10 +1,11 @@
-import type { Staff, Mother, Visit, Vaccination, WeightRecord, ClinicSession } from '../types/entities'
+import type { Staff, Mother, Visit, Vaccination, WeightRecord, ClinicSession, LabReport } from '../types/entities'
 import { createStaff } from './factories/staff.factory'
 import { createMother } from './factories/mother.factory'
 import { createVisit } from './factories/visit.factory'
 import { createVaccination } from './factories/vaccination.factory'
 import { createWeightRecord } from './factories/weight.factory'
 import { createClinicSession } from './factories/session.factory'
+import { createLabReport } from './factories/lab-report.factory'
 import { faker } from './seed'
 
 // ── Staff (10 members) ────────────────────────────────────────────────────────
@@ -73,6 +74,15 @@ const weightRecords: WeightRecord[] = mothers.flatMap((mother) => {
   })
 })
 
+// ── Lab reports (3–6 per mother) ──────────────────────────────────────────────
+const labReports: LabReport[] = mothers.flatMap((mother) => {
+  const count = faker.number.int({ min: 3, max: 6 })
+  return Array.from({ length: count }, () => {
+    const staffId = faker.helpers.arrayElement(staffIds)
+    return createLabReport(mother.id, staffId)
+  })
+})
+
 // ── Clinic sessions (20 total) ────────────────────────────────────────────────
 const sessions: ClinicSession[] = Array.from({ length: 20 }, () => {
   const leadClinicianId = faker.helpers.arrayElement(staffIds)
@@ -89,5 +99,6 @@ export const db = {
   visits,
   vaccinations,
   weightRecords,
+  labReports,
   sessions,
 }
