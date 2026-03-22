@@ -29,11 +29,12 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 | Add Clinic Session | ✅ Built |
 | Clinic Session Detail | ✅ Built |
 | User Profile | ✅ Built |
+| Search Records | ✅ Built |
+| Vaccination Records | ✅ Built |
+| Weight & Health Tracking | ✅ Built |
+| Lab Reports | ✅ Built |
+| Pregnancy Timeline | ✅ Built |
 | Register Clinic Visit | 🔜 Planned |
-| Search Records | 🔜 Planned |
-| Vaccination Records | 🔜 Planned |
-| Weight & Health Tracking | 🔜 Planned |
-| Pregnancy Timeline | 🔜 Planned |
 
 ---
 
@@ -81,6 +82,12 @@ momcare/
 │   │   │   │   └── medical-history/  # Medical History (pregnancies, conditions, attachments)
 │   │   │   └── register/ # Register Mother form
 │   │   ├── notifications/# Notifications feed (4 card types)
+│   │   ├── records/       # Search Records (NIC search)
+│   │   │   └── [id]/
+│   │   │       ├── vaccination/ # Vaccination Records
+│   │   │       ├── weight/      # Weight & Health Tracking
+│   │   │       ├── lab-reports/ # Lab Reports
+│   │   │       └── timeline/    # Pregnancy Timeline
 │   │   └── profile/      # User Profile (account, preferences, quick access)
 │   ├── onboarding/       # Onboarding flow (4 steps)
 │   ├── splash/           # Splash screen with auto-redirect
@@ -148,6 +155,11 @@ npm run test:run     # Vitest (single run)
                      │    ├─► /mothers/register   Register new mother
                      │    └─► /mothers/[id]       Mother Profile (from card or high-risk)
                      │         └─► /mothers/[id]/medical-history  Medical History
+                     ├─► /records        Search Records (bottom nav)
+                     │    └─► /records/[id]/vaccination   Vaccination Records
+                     │    └─► /records/[id]/weight        Weight & Health Tracking
+                     │    └─► /records/[id]/lab-reports   Lab Reports
+                     │    └─► /records/[id]/timeline      Pregnancy Timeline
                      └─► /profile        User Profile (bottom nav)
 ```
 
