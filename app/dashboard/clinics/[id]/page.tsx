@@ -70,7 +70,7 @@ const NAV_ITEMS = [
   { icon: Users,      label: 'MOTHERS', href: '/dashboard/mothers', active: false },
   { icon: Building2,  label: 'CLINICS', href: '/dashboard/clinics', active: true  },
   { icon: FileText,   label: 'RECORDS', href: null,                 active: false },
-  { icon: UserCircle, label: 'PROFILE', href: null,                 active: false },
+  { icon: UserCircle, label: 'PROFILE', href: '/dashboard/profile',                 active: false },
 ]
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
