@@ -14,7 +14,13 @@
       "Bash(cmd /c \"taskkill /F /IM node.exe\")",
       "Bash(cmd /c \"taskkill /PID 19928 /F\")",
       "Skill(gsd:quick)",
-      "WebFetch(domain:momcaredesignsystemwithcodexnew.vercel.app)"
+      "WebFetch(domain:momcaredesignsystemwithcodexnew.vercel.app)",
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(find 'D:/UX projects/MomCare frontend' -type f -name *.test.ts* -o -name *.spec.ts*)",
+      "Bash(xargs head:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npm install:*)"
     ]
   }
 }
