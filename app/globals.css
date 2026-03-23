@@ -211,6 +211,19 @@
   100% { opacity: 1; }
 }
 
+/* Hide native date input text/icons when using custom placeholder overlay */
+input[type="date"]::-webkit-datetime-edit {
+  color: inherit;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
 /* Splash screen animations */
 @keyframes splash-logo-in {
   0% {

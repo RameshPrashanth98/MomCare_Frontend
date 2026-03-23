@@ -400,7 +400,7 @@ export default function RegisterMotherPage() {
 
   const dateInputStyle = (hasValue: boolean, hasError?: boolean): React.CSSProperties => ({
     ...textInputStyle(hasError),
-    color: hasValue ? 'var(--color-on-surface)' : 'var(--color-on-surface-secondary)',
+    color: hasValue ? 'var(--color-on-surface)' : 'transparent',
   })
 
   const sectionCardStyle: React.CSSProperties = {
