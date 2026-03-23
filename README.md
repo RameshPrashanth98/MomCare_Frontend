@@ -51,6 +51,8 @@ MomCare gives clinic staff instant access to every mother's record and lets them
 | Icons | [Lucide React](https://lucide.dev) |
 | Testing | [Vitest](https://vitest.dev) + Testing Library + axe-core |
 | Mocking | [MSW v2](https://mswjs.io) + [@faker-js/faker](https://fakerjs.dev) |
+| Storybook | [Storybook 10](https://storybook.js.org) + a11y addon |
+| CI | GitHub Actions (lint, test, build, storybook) |
 | Deployment | [Vercel](https://vercel.com) |
 
 ---
@@ -98,6 +100,15 @@ momcare/
 │   └── onboarding/       # Onboarding SVG illustrations
 ├── store/
 │   └── ui.ts             # Zustand UI store (auth state, modals)
+├── tests/                # Vitest test suite
+│   ├── api/              # API layer tests (MSW interception)
+│   ├── foundation/       # Token bridge + a11y smoke tests
+│   ├── middleware/        # Auth guard logic tests
+│   └── mock/             # Mock DB referential integrity tests
+├── .storybook/           # Storybook configuration
+├── stories/              # Storybook stories (foundation + demos)
+├── .github/workflows/    # GitHub Actions CI pipeline
+├── middleware.ts          # Auth guard (protects /dashboard routes)
 ├── .planning/            # GSD planning artifacts (roadmap, state, phase plans)
 └── public/               # Static assets
 ```
@@ -130,11 +141,13 @@ Open [http://localhost:3000](http://localhost:3000) — the app starts at the sp
 ### Other Commands
 
 ```bash
-npm run build        # Production build
-npm run lint         # ESLint
-npm run format       # Prettier format
-npm run test         # Vitest (watch mode)
-npm run test:run     # Vitest (single run)
+npm run build           # Production build
+npm run lint            # ESLint
+npm run format          # Prettier format
+npm run test            # Vitest (watch mode)
+npm run test:run        # Vitest (single run)
+npm run storybook       # Storybook dev server (port 6006)
+npm run build-storybook # Build Storybook for deployment
 ```
 
 ---
@@ -162,6 +175,32 @@ npm run test:run     # Vitest (single run)
                      │    └─► /records/[id]/timeline      Pregnancy Timeline
                      └─► /profile        User Profile (bottom nav)
 ```
+
+---
+
+## Infrastructure
+
+### Testing (28 tests)
+- **Mock DB integrity** — verifies referential integrity across all entities (mothers, visits, vaccinations, sessions)
+- **API layer** — MSW intercepts fetch calls and returns typed mock data
+- **Token bridge** — validates design tokens exist in `globals.css` `@theme` block
+- **Accessibility** — axe-core smoke test reports zero WCAG violations
+
+### Auth Middleware
+- `middleware.ts` protects all `/dashboard` routes
+- Redirects unauthenticated users to `/login`
+- Set `AUTH_BYPASS=true` in `.env.local` to skip auth in development
+
+### CI Pipeline (GitHub Actions)
+Runs on every push/PR to `main`:
+1. **Lint** — ESLint + Prettier check
+2. **Test** — Vitest (28 tests)
+3. **Build** — Next.js production build
+4. **Storybook** — Build Storybook with a11y addon
+
+### Storybook
+- Token demo story showcasing all design system tokens (colors, spacing, radius, shadows)
+- a11y addon configured with `test: 'error'` — violations fail CI
 
 ---
 
