@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: "Completed quick task 260322-x8y: Build Pregnancy Timeline screen"
 last_updated: "2026-03-20T00:00:00.000Z"
-last_activity: 2026-03-23 — Redesigned splash and all 4 onboarding screens with design illustrations and animations
+last_activity: 2026-03-23 — Completed Plan 01-03 (testing, Storybook, CI, auth middleware) and pushed to GitHub
 progress:
   total_phases: 6
   completed_phases: 0
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-18)
 ## Current Position
 
 Phase: 1 of 6 (Foundation)
-Plan: 3 of 4 in current phase (01-01 ✓, 01-02 ✓, 01-02b ✓ — 01-03 next)
-Status: In progress
-Last activity: 2026-03-23 — Redesigned splash + onboarding screens with design images and animations
+Plan: 4 of 4 in current phase (01-01 ✓, 01-02 ✓, 01-02b ✓, 01-03 ✓)
+Status: Phase 1 complete
+Last activity: 2026-03-23 — Completed Plan 01-03 and pushed to GitHub
 
 Progress: [██████████] 100%
 
@@ -65,6 +65,9 @@ Recent decisions affecting current work:
 - [Pre-Phase 1]: Next.js version ambiguity — ARCHITECTURE.md references `proxy.ts` (v16) but FOUND-09 references `proxy.ts` also; confirm actual installed version before Phase 1 implementation and use `middleware.ts` if v15.x
 - [Phase 01-01]: Tailwind v4 @theme block in globals.css is the sole design token source — no tailwind.config.ts needed
 - [Phase 01-01]: ESLint local plugin registered inline in eslint.config.mjs — no separate npm package required for custom rules
+- [Phase 01-03]: middleware.ts used for auth guard (not proxy.ts) — standard Next.js pattern, works with Next.js 16
+- [Phase 01-03]: Storybook browser-based Vitest integration removed — too heavy; storybook build used for CI instead
+- [Phase 01-03]: Pre-existing arbitrary Tailwind values in screens converted to inline styles to pass lint
 - [Phase quick]: lucide-react installed as missing dependency for login screen icons (Globe, Plus, User, Lock, Eye, EyeOff)
 
 ### Pending Todos
@@ -114,6 +117,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23T18:00:00Z
-Stopped at: Redesigned splash and all 4 onboarding screens with design illustrations and animations
+Last session: 2026-03-23T20:00:00Z
+Stopped at: Completed Plan 01-03 (testing, Storybook, CI, auth middleware) — Phase 1 Foundation fully complete
 Resume file: .planning/.continue-here.md
