@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  const session = request.cookies.get('session')
+  const session = request.cookies.get('momcare-session')
   if (!session?.value) {
     const loginUrl = new URL('/login', request.url)
     return NextResponse.redirect(loginUrl)
