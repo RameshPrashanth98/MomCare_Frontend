@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: "Completed quick task 260323-iv7: Fix login navigation and remove Storybook"
 last_updated: "2026-03-20T00:00:00.000Z"
-last_activity: 2026-03-23 — Completed quick task 260323-jfn: Push changes to GitHub and update README
+last_activity: 2026-03-23 — Completed quick task 260323-jms: Fix overlapping placeholder text in Register Mother date fields
 progress:
   total_phases: 6
   completed_phases: 0
@@ -109,6 +109,7 @@ None yet.
 | 260323-0dp | Modify splash screen with MomCare logo animation on white background | 2026-03-23 | 4b4bf11 | [260323-0dp-modify-splash-screen-with-momcare-logo-a](./quick/260323-0dp-modify-splash-screen-with-momcare-logo-a/) |
 | 260323-iv7 | Fix login cookie name mismatch and remove all Storybook code | 2026-03-23 | c2b79b5 | [260323-iv7-fix-login-navigation-and-remove-storyboo](./quick/260323-iv7-fix-login-navigation-and-remove-storyboo/) |
 | 260323-jfn | Push changes to GitHub and update README | 2026-03-23 | a2bc92d | [260323-jfn-push-changes-to-github-and-update-readme](./quick/260323-jfn-push-changes-to-github-and-update-readme/) |
+| 260323-jms | Fix overlapping placeholder text in Register Mother date fields | 2026-03-23 | 42bb1e1 | [260323-jms-fix-overlapping-placeholder-text-in-regi](./quick/260323-jms-fix-overlapping-placeholder-text-in-regi/) |
 
 ### Blockers/Concerns
 
