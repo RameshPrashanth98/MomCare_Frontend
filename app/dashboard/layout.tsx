@@ -7,8 +7,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       style={{ background: 'var(--color-surface-secondary)' }}
     >
       <div
-        className="w-full max-w-[430px] min-h-dvh relative flex flex-col"
-        style={{ background: 'var(--color-surface-secondary)' }}
+        className="w-full min-h-dvh relative flex flex-col"
+        style={{ maxWidth: '430px', background: 'var(--color-surface-secondary)' }}
       >
         {children}
       </div>

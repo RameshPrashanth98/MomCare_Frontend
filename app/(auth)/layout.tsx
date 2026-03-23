@@ -9,7 +9,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           'radial-gradient(ellipse at center, var(--color-splash-bg-center) 0%, var(--color-splash-bg-mid) 50%, var(--color-splash-bg-edge) 100%)',
       }}
     >
-      <div className="w-full max-w-[430px] min-h-dvh">
+      <div className="w-full min-h-dvh" style={{ maxWidth: '430px' }}>
         {children}
       </div>
     </div>

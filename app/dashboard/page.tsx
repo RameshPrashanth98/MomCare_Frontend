@@ -68,7 +68,7 @@ export default function DashboardPage() {
     <div className="flex flex-col h-dvh overflow-hidden">
 
       {/* ── Scrollable content ──────────────────────────────────────────────── */}
-      <div className="flex-1 overflow-y-auto pb-[140px]">
+      <div className="flex-1 overflow-y-auto" style={{ paddingBottom: '140px' }}>
 
         {/* 1. Top App Bar */}
         <div

@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import { defineConfig, globalIgnores } from 'eslint/config'
 import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
@@ -13,6 +16,8 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    // Storybook build output
+    'storybook-static/**',
   ]),
   // Local plugin: block arbitrary Tailwind values — enforce design token usage
   {
@@ -27,6 +32,7 @@ const eslintConfig = defineConfig([
       'local/no-tailwind-arbitrary': 'error',
     },
   },
+  ...storybook.configs["flat/recommended"]
 ])
 
 export default eslintConfig

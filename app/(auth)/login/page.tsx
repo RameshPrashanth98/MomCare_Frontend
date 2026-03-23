@@ -32,8 +32,10 @@ export default function LoginPage() {
 
       {/* Decorative pink blob */}
       <div
-        className="absolute w-[200px] h-[200px] rounded-full pointer-events-none"
+        className="absolute rounded-full pointer-events-none"
         style={{
+          width: '200px',
+          height: '200px',
           background: 'var(--color-brand-pink-light)',
           opacity: 0.3,
           filter: 'blur(40px)',
@@ -60,8 +62,9 @@ export default function LoginPage() {
 
       {/* Heading */}
       <h1
-        className="mt-[var(--spacing-md)] text-[22px] font-bold text-center"
+        className="mt-[var(--spacing-md)] font-bold text-center"
         style={{
+          fontSize: '22px',
           color: 'var(--color-on-surface)',
           fontFamily: 'serif',
         }}
@@ -71,8 +74,8 @@ export default function LoginPage() {
 
       {/* Subheading */}
       <p
-        className="mt-[var(--spacing-xs)] text-[11px] uppercase tracking-[2px]"
-        style={{ color: 'var(--color-on-surface-secondary)' }}
+        className="mt-[var(--spacing-xs)] uppercase"
+        style={{ fontSize: '11px', letterSpacing: '2px', color: 'var(--color-on-surface-secondary)' }}
       >
         CLINIC SYSTEM . SRI LANKA
       </p>
@@ -97,8 +100,9 @@ export default function LoginPage() {
             placeholder="Enter Staff ID"
             value={staffId}
             onChange={(e) => setStaffId(e.target.value)}
-            className="flex-1 bg-transparent border-none outline-none text-[14px]"
+            className="flex-1 bg-transparent border-none outline-none"
             style={{
+              fontSize: '14px',
               color: 'var(--color-on-surface)',
               caretColor: 'var(--color-brand-pink)',
             }}
@@ -120,8 +124,9 @@ export default function LoginPage() {
             placeholder="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="flex-1 bg-transparent border-none outline-none text-[14px]"
+            className="flex-1 bg-transparent border-none outline-none"
             style={{
+              fontSize: '14px',
               color: 'var(--color-on-surface)',
               caretColor: 'var(--color-brand-pink)',
             }}
@@ -148,8 +153,8 @@ export default function LoginPage() {
           />
           <label
             htmlFor="remember-me"
-            className="text-[14px] cursor-pointer"
-            style={{ color: 'var(--color-on-surface)' }}
+            className="cursor-pointer"
+            style={{ fontSize: '14px', color: 'var(--color-on-surface)' }}
           >
             Remember me
           </label>
@@ -158,8 +163,9 @@ export default function LoginPage() {
         {/* Login button */}
         <button
           type="submit"
-          className="mt-[var(--spacing-lg)] w-full font-semibold text-[16px] text-white"
+          className="mt-[var(--spacing-lg)] w-full font-semibold text-white"
           style={{
+            fontSize: '16px',
             height: '52px',
             borderRadius: 'var(--radius-full)',
             background: 'var(--color-brand-pink)',
@@ -174,14 +180,14 @@ export default function LoginPage() {
 
       {/* Links row */}
       <div
-        className="mt-[var(--spacing-md)] text-[13px] text-center"
-        style={{ color: 'var(--color-brand-pink)' }}
+        className="mt-[var(--spacing-md)] text-center"
+        style={{ fontSize: '13px', color: 'var(--color-brand-pink)' }}
       >
         <button
           type="button"
           onClick={() => console.log('Forgot password')}
-          className="bg-transparent border-none cursor-pointer text-[13px]"
-          style={{ color: 'var(--color-brand-pink)' }}
+          className="bg-transparent border-none cursor-pointer"
+          style={{ fontSize: '13px', color: 'var(--color-brand-pink)' }}
         >
           Forgot Password
         </button>
@@ -189,8 +195,8 @@ export default function LoginPage() {
         <button
           type="button"
           onClick={() => console.log('Contact admin')}
-          className="bg-transparent border-none cursor-pointer text-[13px]"
-          style={{ color: 'var(--color-brand-pink)' }}
+          className="bg-transparent border-none cursor-pointer"
+          style={{ fontSize: '13px', color: 'var(--color-brand-pink)' }}
         >
           Contact Administrator
         </button>
@@ -198,8 +204,9 @@ export default function LoginPage() {
 
       {/* Info card */}
       <div
-        className="mt-[var(--spacing-xl)] w-full text-center text-[13px]"
+        className="mt-[var(--spacing-xl)] w-full text-center"
         style={{
+          fontSize: '13px',
           border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-lg)',
           padding: 'var(--spacing-md)',
