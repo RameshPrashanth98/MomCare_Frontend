@@ -18,7 +18,7 @@ const STATS = [
     // intentional per design spec. All other colours use design tokens.
     bg: '#FFF0F3',
   },
-  { label: 'Upcoming Appts',   value: 12, color: 'var(--color-on-surface)',   bg: 'var(--color-surface)' },
+  { label: 'Upcoming Appointments',   value: 12, color: 'var(--color-on-surface)',   bg: 'var(--color-surface)' },
   { label: 'Recent Updates',   value: 4,  color: 'var(--color-primary)',      bg: 'var(--color-primary-light)' },
 ]
 
